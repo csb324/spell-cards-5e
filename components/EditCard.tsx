@@ -1,5 +1,6 @@
 import { ChangeEvent, ChangeEventHandler } from "react";
-import { SpellType } from "../utils/models";
+import { SpellType, SrdType } from "../utils/models";
+import SpellNameField from "./SpellNameField";
 
 type ValidStringKeys = 
   'name' | 'desc' | 'schoolOfMagic' | 'higherLevelDesc' | 'range' | 'castingTime' | 'duration';
@@ -25,27 +26,34 @@ function FormField({
 
 function EditCard({
   cardData,
-  save
+  save,
+  allSrdSpells
 }: {
   cardData: SpellType,
-  save: Function
+  save: Function,
+  allSrdSpells: SrdType[]
 }) {
-
   const setString = (key: ValidStringKeys): ChangeEventHandler => {
     const setFunction: ChangeEventHandler = (event: ChangeEvent<HTMLInputElement>) => {
       const newData = { ...cardData};
       newData[key] = event.target.value;
       save(newData);
     }
-
     return setFunction;
+  }
+
+  const setName = (newName: string) => {
+    const newData = {...cardData};
+    newData.name = newName;
+    save(newData);
   }
 
   return (
     <div className="edit">
       <h1>edit screen</h1>
 
-      <FormField title="Spell Name" identifier="name" value={cardData.name} onChange={ setString('name') } />
+      <SpellNameField initialValue={cardData.name} setName={ setName } setAll={ save } allSrdSpells={allSrdSpells} />
+
       <FormField title="Range" identifier="range" value={cardData.range} onChange={ setString('range') } />
       <FormField title="Casting Time" value={cardData.castingTime} identifier="castingTime" onChange={ setString('castingTime') } />
       <FormField title="Duration" identifier="duration" value={cardData.duration} onChange={ setString('duration') } />

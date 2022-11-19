@@ -21,3 +21,9 @@ export type SpellType = {
   damageAtCharacterLevel?: Record<number, string>,
   components: ComponentType
 }
+
+export type SrdType = {
+  index: string,
+  name: string,
+  url: string
+}

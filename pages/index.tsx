@@ -1,14 +1,14 @@
 import { useState } from "react";
 import Card from '../components/Card';
-import { SpellType } from "../utils/models";
+import { SpellType, SrdType } from "../utils/models";
 import { blankCard } from "../utils/constants";
 import SpellApiService from "../utils/SpellApiService";
 import EditCard from "../components/EditCard";
 
 function App() {
   const [activeCard, setActiveCard] = useState(-1);
-  const [cardsData, setCardsData] = useState([SpellApiService.get('')]);
-  const [allSrdSpells, setAllSrdSpells] = useState([]);
+  const [cardsData, setCardsData] = useState<SpellType[]>([]);
+  const [allSrdSpells, setAllSrdSpells] = useState<SrdType[]>([]);
 
   if(allSrdSpells.length === 0) {
     SpellApiService.getList().then((list) => {
@@ -35,7 +35,7 @@ function App() {
 
   if(activeCard === -1) {
     const cards = cardsData.map((c, index) => (
-      <Card key={c.name} spell={c} select={selectFunction(index)} isActive={ index === activeCard }/>
+      <Card key={c.name} spell={c} select={selectFunction(index)} isActive={ false }/>
     ));
     
     return (
@@ -56,7 +56,8 @@ function App() {
           <button onClick={selectFunction(-1)}>Back</button>
           <EditCard 
             cardData={cardsData[activeCard]}
-            save={updateCard} />
+            save={updateCard}
+            allSrdSpells={allSrdSpells} />
         </div>
 
         <div className="flex-grow">
