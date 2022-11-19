@@ -28,27 +28,39 @@ function App() {
 
 
   if(activeCard === -1) {
+    
     const cards = cardsData.map((c, index) => (
       <Card key={c.name} spell={c} select={selectFunction(index)} isActive={ index === activeCard }/>
     ));
     
     return (
-      <div className="App">
+      <div className="container mx-auto p-4 flex">
         <button onClick={() => addCard()}>add</button>
-        
-        { cards }
+
+        <div className="flex flex-grow">
+          { cards }
+        </div>
       </div>
+
     );
   } else {
     const c = cardsData[activeCard];
 
     return (
-      <div className="App">
+      <div className="container mx-auto p-4 flex">
+
+        <div className="flex-initial">
+        <button onClick={selectFunction(-1)}>Back</button>
+
         <EditCard 
           cardData={cardsData[activeCard]}
           save={updateCard} />
+        </div>
 
-        <Card key={c.name} spell={c} select={selectFunction(activeCard)} isActive={ true }/>
+        <div className="flex-grow">
+          <Card key={c.name} spell={c} select={selectFunction(activeCard)} isActive={ true }/>
+
+        </div>
       </div>
     )
   }
