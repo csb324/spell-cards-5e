@@ -8,6 +8,13 @@ import EditCard from "../components/EditCard";
 function App() {
   const [activeCard, setActiveCard] = useState(-1);
   const [cardsData, setCardsData] = useState([SpellApiService.get('')]);
+  
+  const [knownSpells, setKnownSpells] = useState([]);
+  if(knownSpells.length === 0) {
+    SpellApiService.getList().then((list) => {
+      setKnownSpells(list.results)
+    });  
+  }
 
   const selectFunction = (index:number) => {
     return () => {
@@ -26,7 +33,6 @@ function App() {
     newCards[activeCard] = newData;
     setCardsData(newCards);
   }
-
 
   if(activeCard === -1) {
     const cards = cardsData.map((c, index) => (
