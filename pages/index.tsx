@@ -4,15 +4,16 @@ import { SpellType } from "../utils/models";
 import { blankCard } from "../utils/constants";
 import SpellApiService from "../utils/SpellApiService";
 import EditCard from "../components/EditCard";
+import MainStore from "../utils/MainStore";
 
 function App() {
   const [activeCard, setActiveCard] = useState(-1);
   const [cardsData, setCardsData] = useState([SpellApiService.get('')]);
-  
-  const [knownSpells, setKnownSpells] = useState([]);
-  if(knownSpells.length === 0) {
+  const [allSrdSpells, setAllSrdSpells] = useState([]);
+
+  if(allSrdSpells.length === 0) {
     SpellApiService.getList().then((list) => {
-      setKnownSpells(list.results)
+      setAllSrdSpells(list.results)
     });  
   }
 
@@ -34,6 +35,7 @@ function App() {
     setCardsData(newCards);
   }
 
+
   if(activeCard === -1) {
     const cards = cardsData.map((c, index) => (
       <Card key={c.name} spell={c} select={selectFunction(index)} isActive={ index === activeCard }/>
@@ -51,21 +53,17 @@ function App() {
 
   } else {
     const c = cardsData[activeCard];
-
     return (
       <div className="container mx-auto p-4 flex">
-
         <div className="flex-initial">
-        <button onClick={selectFunction(-1)}>Back</button>
-
-        <EditCard 
-          cardData={cardsData[activeCard]}
-          save={updateCard} />
+          <button onClick={selectFunction(-1)}>Back</button>
+          <EditCard 
+            cardData={cardsData[activeCard]}
+            save={updateCard} />
         </div>
 
         <div className="flex-grow">
           <Card key={c.name} spell={c} select={selectFunction(activeCard)} isActive={ true }/>
-
         </div>
       </div>
     )
