@@ -4,7 +4,6 @@ import { SpellType } from "../utils/models";
 import { blankCard } from "../utils/constants";
 import SpellApiService from "../utils/SpellApiService";
 import EditCard from "../components/EditCard";
-import MainStore from "../utils/MainStore";
 
 function App() {
   const [activeCard, setActiveCard] = useState(-1);
@@ -18,9 +17,7 @@ function App() {
   }
 
   const selectFunction = (index:number) => {
-    return () => {
-      setActiveCard(index);
-    }
+    return () => setActiveCard(index);
   }
 
   const addCard = () => {
