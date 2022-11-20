@@ -13,6 +13,11 @@ function App() {
   const [editorState, setEditorState] = useState(
     () => EditorState.createEmpty()
   );
+  const [higherLevelEditorState, setHigherLevelEditorState] = useState(
+    () => EditorState.createEmpty()
+  );
+
+
 
   if(allSrdSpells.length === 0) {
     SpellApiService.getList().then((list) => {
@@ -24,6 +29,14 @@ function App() {
     return () => {
       if(index > 0) {
         setEditorState(EditorState.createWithContent(ContentState.createFromText(cardsData[index].desc, "/n")));
+        
+        if(cardsData[index].higherLevelDesc !== undefined) {
+          setHigherLevelEditorState(
+            EditorState.createWithContent(
+              ContentState.createFromText(cardsData[index].higherLevelDesc as string, "/n")
+            )
+          );
+        }
       }
       setActiveCard(index)
     };
@@ -31,7 +44,10 @@ function App() {
 
   const addCard = () => {
     const newCards: SpellType[] = [...cardsData, {...blankCard}];
+
     setEditorState(EditorState.createEmpty());
+    setHigherLevelEditorState(EditorState.createEmpty());
+
     setCardsData(newCards);
     setActiveCard(newCards.length - 1);
   }
@@ -40,6 +56,7 @@ function App() {
     const newCards = [...cardsData];
     newCards[activeCard] = newData;
     setEditorState(EditorState.createWithContent(ContentState.createFromText(newData.desc, "/n")));
+    setHigherLevelEditorState(EditorState.createWithContent(ContentState.createFromText(newData.higherLevelDesc || '', "/n")));
     setCardsData(newCards);
   }
 
@@ -47,11 +64,10 @@ function App() {
     const cards = cardsData.map((c, index) => (
       <Card key={c.name} spell={c} select={selectFunction(index)} isActive={ false }/>
     ));
-    
+  
     return (
       <div className="container mx-auto p-4">
         <button className="print:hidden px-3 bg-blue-700 text-white" onClick={() => addCard()}>add</button>
-
         <div className="flex-wrap flex justify-between">
           { cards }
         </div>
@@ -69,7 +85,9 @@ function App() {
             save={updateCard}
             allSrdSpells={allSrdSpells}
             editorState={editorState}
-            setEditorState={setEditorState} />
+            setEditorState={setEditorState}
+            higherLevelEditorState={higherLevelEditorState}
+            setHigherLevelEditorState={setHigherLevelEditorState} />
         </div>
 
         <div className="flex-grow">

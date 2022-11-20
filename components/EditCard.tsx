@@ -5,7 +5,9 @@ import SpellDescriptionField from "./SpellDescriptionField";
 import SpellNameField from "./SpellNameField";
 
 type ValidStringKeys = 
-  'name' | 'desc' | 'schoolOfMagic' | 'higherLevelDesc' | 'range' | 'castingTime' | 'duration';
+  'name' | 'schoolOfMagic' | 'higherLevelDesc' | 'range' | 'castingTime' | 'duration';
+
+type ValidRichKeys = 'desc' | 'higherLevelDesc';
 
 function FormField({
   title,
@@ -31,13 +33,17 @@ function EditCard({
   save,
   allSrdSpells,
   editorState,
-  setEditorState
+  setEditorState,
+  higherLevelEditorState,
+  setHigherLevelEditorState
 }: {
   cardData: SpellType,
   save: Function,
   allSrdSpells: SrdType[],
   editorState: EditorState,
-  setEditorState: Function
+  setEditorState: Function,
+  higherLevelEditorState: EditorState,
+  setHigherLevelEditorState: Function
 }) {
 
   const setString = (key: ValidStringKeys): ChangeEventHandler => {
@@ -55,11 +61,12 @@ function EditCard({
     save(newData);
   }
 
-  const setDescFancy = (newDesc: ContentState) => {
-    const newData = {...cardData};
-    newData.desc = newDesc.getPlainText('\n');
-    console.log(newData.desc);
-    save(newData);
+  const setRichText = (k: ValidRichKeys) => {
+    return (newDesc: ContentState) => {
+      const newData = {...cardData};
+      newData[k] = newDesc.getPlainText('\n');
+      save(newData);
+    }
   }
 
   return (
@@ -91,10 +98,19 @@ function EditCard({
       />
 
       <SpellDescriptionField 
+        title="Spell Description"
         spellDesc={cardData.desc} 
-        updateSpellDesc={setDescFancy}
+        updateSpellDesc={setRichText('desc')}
         editorState={editorState}
         setEditorState={setEditorState}
+      />
+
+      <SpellDescriptionField
+        title="At higher levels?"
+        spellDesc={cardData.higherLevelDesc || ''} 
+        updateSpellDesc={setRichText('higherLevelDesc')}
+        editorState={higherLevelEditorState}
+        setEditorState={setHigherLevelEditorState}
       />
     </div>
   )

@@ -33,6 +33,7 @@ const SpellApiService = {
       name: apiResponse["name"],
       level: apiResponse["level"],
       desc: apiResponse["desc"].join("/n"),
+      higherLevelDesc: apiResponse["higher_level"].join("/n"),
       schoolOfMagic: apiResponse["school"]["name"],
       range: apiResponse["range"],
       duration: apiResponse["duration"],

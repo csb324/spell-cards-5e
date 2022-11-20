@@ -69,6 +69,7 @@ function SpellNameField({
     const srdData = SpellApiService.get(srd.index);
     srdData.then((data: SpellType) => {
       setAll(data); 
+      console.log(data);
     })
     setShowSuggestions(false);
   }
