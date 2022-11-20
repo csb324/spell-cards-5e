@@ -20,6 +20,13 @@ function Card({
     </button>
   );
 
+  const higherLevelContainer = spell.higherLevelDesc && (
+    <div>
+      <p className={styles.atHigherLabel}>At Higher Levels</p>
+      <p dangerouslySetInnerHTML={{__html: spell.higherLevelDesc.replace("/n", "<br>")}}></p>
+    </div>
+  )
+
   return (
     <div className={`relative mb-1 mr-1 print:m-0 ${ isActive ? 'border-blue-600' : ''}`}>
       { activeButton }
@@ -56,8 +63,8 @@ function Card({
           </div>
         </div>
         <div className={styles.details}>
-          <p dangerouslySetInnerHTML={{__html: spell.desc.replace(/\/n/g, "<br>")}}></p>
-          { spell.higherLevelDesc && <p dangerouslySetInnerHTML={{__html: spell.higherLevelDesc.replace("/n", "<br>")}}></p>}
+          <p className={styles.desc} dangerouslySetInnerHTML={{__html: spell.desc.replace(/\/n/g, "<br>")}}></p>
+          { higherLevelContainer }
         </div>
       </div>
 

@@ -4,6 +4,8 @@
 
   border: 3px solid;
   text-align: center;
+  display: flex;
+  flex-direction: column;
 }
 
 .spellName {
@@ -36,4 +38,15 @@
   padding: 3px 8px;
   text-align: justify;
   font-size: 9px;
+  flex-grow: 1;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.atHigherLabel {
+  font-weight: bold;
+}
+.desc {
+  flex-grow: 1;
 }

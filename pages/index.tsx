@@ -17,12 +17,10 @@ function App() {
     () => EditorState.createEmpty()
   );
 
-
-
   if(allSrdSpells.length === 0) {
     SpellApiService.getList().then((list) => {
       setAllSrdSpells(list.results)
-    });  
+    });
   }
 
   const selectFunction = (index:number) => {
@@ -55,8 +53,6 @@ function App() {
   const updateCard = (newData: SpellType) => {
     const newCards = [...cardsData];
     newCards[activeCard] = newData;
-    setEditorState(EditorState.createWithContent(ContentState.createFromText(newData.desc, "/n")));
-    setHigherLevelEditorState(EditorState.createWithContent(ContentState.createFromText(newData.higherLevelDesc || '', "/n")));
     setCardsData(newCards);
   }
 
@@ -78,8 +74,9 @@ function App() {
     const c = cardsData[activeCard];
     return (
       <div className="container mx-auto p-4 flex">
-        <div className="flex-initial">
+        <div className="flex-initial w-full md:w-1/2">
           <button onClick={selectFunction(-1)}>Back</button>
+
           <EditCard 
             cardData={cardsData[activeCard]}
             save={updateCard}
@@ -90,7 +87,7 @@ function App() {
             setHigherLevelEditorState={setHigherLevelEditorState} />
         </div>
 
-        <div className="flex-grow">
+        <div className="flex-grow w-full md:w-1/2 justify-center flex">
           <Card key={c.name} spell={c} select={selectFunction(activeCard)} isActive={ true }/>
         </div>
       </div>
