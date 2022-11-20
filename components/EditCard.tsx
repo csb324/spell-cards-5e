@@ -1,5 +1,7 @@
-import { ChangeEvent, ChangeEventHandler } from "react";
+import { ChangeEvent, ChangeEventHandler, useState } from "react";
+import { ContentState, EditorState } from 'draft-js';
 import { SpellType, SrdType } from "../utils/models";
+import SpellDescriptionField from "./SpellDescriptionField";
 import SpellNameField from "./SpellNameField";
 
 type ValidStringKeys = 
@@ -27,12 +29,17 @@ function FormField({
 function EditCard({
   cardData,
   save,
-  allSrdSpells
+  allSrdSpells,
+  editorState,
+  setEditorState
 }: {
   cardData: SpellType,
   save: Function,
-  allSrdSpells: SrdType[]
+  allSrdSpells: SrdType[],
+  editorState: EditorState,
+  setEditorState: Function
 }) {
+
   const setString = (key: ValidStringKeys): ChangeEventHandler => {
     const setFunction: ChangeEventHandler = (event: ChangeEvent<HTMLInputElement>) => {
       const newData = { ...cardData};
@@ -48,12 +55,22 @@ function EditCard({
     save(newData);
   }
 
+  const setDescFancy = (newDesc: ContentState) => {
+    const newData = {...cardData};
+    newData.desc = newDesc.getPlainText('\n');
+    console.log(newData.desc);
+    save(newData);
+  }
+
   return (
     <div className="edit">
-      <h1>edit screen</h1>
-
-      <SpellNameField initialValue={cardData.name} setName={ setName } setAll={ save } allSrdSpells={allSrdSpells} />
-
+      <SpellNameField 
+        initialValue={cardData.name} 
+        setName={ setName }
+        setAll={ save } 
+        allSrdSpells={allSrdSpells}
+      />
+      
       <FormField 
         title="Range" 
         identifier="range" 
@@ -72,9 +89,14 @@ function EditCard({
         value={cardData.duration} 
         onChange={ setString('duration') } 
       />
- 
-    </div>
 
+      <SpellDescriptionField 
+        spellDesc={cardData.desc} 
+        updateSpellDesc={setDescFancy}
+        editorState={editorState}
+        setEditorState={setEditorState}
+      />
+    </div>
   )
 }
 

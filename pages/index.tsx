@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { EditorState, ContentState } from "draft-js";
 import Card from '../components/Card';
 import { SpellType, SrdType } from "../utils/models";
 import { blankCard } from "../utils/constants";
@@ -9,6 +10,9 @@ function App() {
   const [activeCard, setActiveCard] = useState(-1);
   const [cardsData, setCardsData] = useState<SpellType[]>([]);
   const [allSrdSpells, setAllSrdSpells] = useState<SrdType[]>([]);
+  const [editorState, setEditorState] = useState(
+    () => EditorState.createEmpty()
+  );
 
   if(allSrdSpells.length === 0) {
     SpellApiService.getList().then((list) => {
@@ -17,11 +21,17 @@ function App() {
   }
 
   const selectFunction = (index:number) => {
-    return () => setActiveCard(index);
+    return () => {
+      if(index > 0) {
+        setEditorState(EditorState.createWithContent(ContentState.createFromText(cardsData[index].desc, "/n")));
+      }
+      setActiveCard(index)
+    };
   }
 
   const addCard = () => {
     const newCards: SpellType[] = [...cardsData, {...blankCard}];
+    setEditorState(EditorState.createEmpty());
     setCardsData(newCards);
     setActiveCard(newCards.length - 1);
   }
@@ -29,9 +39,9 @@ function App() {
   const updateCard = (newData: SpellType) => {
     const newCards = [...cardsData];
     newCards[activeCard] = newData;
+    setEditorState(EditorState.createWithContent(ContentState.createFromText(newData.desc, "/n")));
     setCardsData(newCards);
   }
-
 
   if(activeCard === -1) {
     const cards = cardsData.map((c, index) => (
@@ -57,7 +67,9 @@ function App() {
           <EditCard 
             cardData={cardsData[activeCard]}
             save={updateCard}
-            allSrdSpells={allSrdSpells} />
+            allSrdSpells={allSrdSpells}
+            editorState={editorState}
+            setEditorState={setEditorState} />
         </div>
 
         <div className="flex-grow">

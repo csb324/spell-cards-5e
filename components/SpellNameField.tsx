@@ -71,7 +71,6 @@ function SpellNameField({
       setAll(data); 
     })
     setShowSuggestions(false);
-    console.log(srd);
   }
 
   const onChange: ChangeEventHandler = (event: ChangeEvent<HTMLInputElement>) => {
