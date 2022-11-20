@@ -39,10 +39,10 @@ function App() {
     ));
     
     return (
-      <div className="container mx-auto p-4 flex">
-        <button onClick={() => addCard()}>add</button>
+      <div className="container mx-auto p-4">
+        <button className="print:hidden px-3 bg-blue-700 text-white" onClick={() => addCard()}>add</button>
 
-        <div className="flex flex-grow">
+        <div className="flex-wrap flex justify-between">
           { cards }
         </div>
       </div>

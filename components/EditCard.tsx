@@ -54,9 +54,24 @@ function EditCard({
 
       <SpellNameField initialValue={cardData.name} setName={ setName } setAll={ save } allSrdSpells={allSrdSpells} />
 
-      <FormField title="Range" identifier="range" value={cardData.range} onChange={ setString('range') } />
-      <FormField title="Casting Time" value={cardData.castingTime} identifier="castingTime" onChange={ setString('castingTime') } />
-      <FormField title="Duration" identifier="duration" value={cardData.duration} onChange={ setString('duration') } />
+      <FormField 
+        title="Range" 
+        identifier="range" 
+        value={cardData.range} 
+        onChange={ setString('range') } 
+      />
+      <FormField 
+        title="Casting Time" 
+        value={cardData.castingTime} 
+        identifier="castingTime" 
+        onChange={ setString('castingTime') } 
+      />
+      <FormField 
+        title="Duration" 
+        identifier="duration" 
+        value={cardData.duration} 
+        onChange={ setString('duration') } 
+      />
  
     </div>
 

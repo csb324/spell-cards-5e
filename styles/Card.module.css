@@ -1,0 +1,39 @@
+.Card {
+  width: 240px;
+  height: 336px;
+
+  border: 3px solid;
+  text-align: center;
+}
+
+.spellName {
+  font-size: 16px;
+  border-bottom: 1px solid;
+}
+
+.spellType {
+  font-size: 10px;
+  border-bottom: 1px solid;
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+}
+.metaBox {
+  width: 50%;
+}
+
+.metaLabel {
+  font-size: 10px;
+  font-weight: bold;
+}
+.metaInfo {
+  font-size: 10px;
+}
+
+.details {
+  padding: 3px 8px;
+  text-align: justify;
+  font-size: 9px;
+}

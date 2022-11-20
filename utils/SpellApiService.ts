@@ -8,7 +8,7 @@ const SpellApiService = {
   },
   
   convertDamagePerLevel: (apiResponse: Record<string, any>): Record<number, string> => {
-    if(!apiResponse["damage"]) {
+    if(!apiResponse["damage"] || !apiResponse["damage"]["damage_at_character_level"]) {
       return {};
     }
 
