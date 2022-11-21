@@ -33,7 +33,6 @@ function Card({
 
       <div className={styles.Card}>
         <h1 className={styles.spellName}>{name}</h1>
-        <p className={styles.spellType}>Level {level} { spell.schoolOfMagic }</p>
         <div className={styles.meta}>
           <div className={styles.metaBox}>
             <p className={styles.metaLabel}>Casting Time</p>
@@ -66,6 +65,8 @@ function Card({
           <p className={styles.desc} dangerouslySetInnerHTML={{__html: spell.desc.replace(/\/n/g, "<br>")}}></p>
           { higherLevelContainer }
         </div>
+        <p className={styles.spellType}>Level {level} { spell.schoolOfMagic }</p>
+
       </div>
 
     </div>

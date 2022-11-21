@@ -1,10 +1,15 @@
 import { useState } from "react";
 import { EditorState, ContentState } from "draft-js";
+
 import Card from '../components/Card';
 import { SpellType, SrdType } from "../utils/models";
 import { blankCard } from "../utils/constants";
 import SpellApiService from "../utils/SpellApiService";
 import EditCard from "../components/EditCard";
+import ThemeChooser from "../components/ThemeChooser";
+import FontSnippet from "../components/FontSnippet";
+import AllCards from "../components/AllCards";
+import OneCard from "../components/OneCard";
 
 function App() {
   const [activeCard, setActiveCard] = useState(-1);
@@ -22,6 +27,7 @@ function App() {
       setAllSrdSpells(list.results)
     });
   }
+
 
   const selectFunction = (index:number) => {
     return () => {
@@ -50,49 +56,43 @@ function App() {
     setActiveCard(newCards.length - 1);
   }
 
-  const updateCard = (newData: SpellType) => {
+  const updateCard = (newData: SpellType, overwrite: boolean = false) => {
     const newCards = [...cardsData];
     newCards[activeCard] = newData;
     setCardsData(newCards);
+    if(overwrite) {
+      setEditorState(EditorState.createWithContent(ContentState.createFromText(newData.desc, "/n")));
+      if(newData.higherLevelDesc !== undefined) {
+        setHigherLevelEditorState(
+          EditorState.createWithContent(
+            ContentState.createFromText(newData.higherLevelDesc as string, "/n")
+          )
+        );
+      }
+    }
   }
 
-  if(activeCard === -1) {
-    const cards = cardsData.map((c, index) => (
-      <Card key={c.name} spell={c} select={selectFunction(index)} isActive={ false }/>
-    ));
-  
-    return (
-      <div className="container mx-auto p-4">
-        <button className="print:hidden px-3 bg-blue-700 text-white" onClick={() => addCard()}>add</button>
-        <div className="flex-wrap flex justify-between">
-          { cards }
-        </div>
-      </div>
-    )
-
-  } else {
-    const c = cardsData[activeCard];
-    return (
-      <div className="container mx-auto p-4 flex">
-        <div className="flex-initial w-full md:w-1/2">
-          <button onClick={selectFunction(-1)}>Back</button>
-
-          <EditCard 
-            cardData={cardsData[activeCard]}
-            save={updateCard}
-            allSrdSpells={allSrdSpells}
-            editorState={editorState}
-            setEditorState={setEditorState}
-            higherLevelEditorState={higherLevelEditorState}
-            setHigherLevelEditorState={setHigherLevelEditorState} />
-        </div>
-
-        <div className="flex-grow w-full md:w-1/2 justify-center flex">
-          <Card key={c.name} spell={c} select={selectFunction(activeCard)} isActive={ true }/>
-        </div>
-      </div>
-    )
-  }
+  return (      
+    <div className="container mx-auto p-4">
+      <FontSnippet />
+      <ThemeChooser />
+      { (activeCard === -1) ? 
+        <AllCards 
+          cardsData={cardsData}
+          selectFunction={selectFunction}
+          addCard={addCard} /> :
+        <OneCard 
+          card={cardsData[activeCard]}
+          editorState={editorState}
+          setEditorState={setEditorState}
+          setHigherLevelEditorState={setHigherLevelEditorState}
+          higherLevelEditorState={higherLevelEditorState}
+          selectFunction={selectFunction} 
+          updateCard={updateCard} 
+          allSrdSpells={allSrdSpells} />
+      }
+    </div>
+  )
 }
 
 export default App;

@@ -1,3 +1,25 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+  --text-size: 9px;
+}
+
+/* font-family: 'Lora', serif;
+font-family: 'Marhey', cursive;
+font-family: 'Overpass', sans-serif;
+font-family: 'Poppins', sans-serif;
+font-family: 'Sono', sans-serif; */
+
+body[data-theme='basic'] {
+  --header-font: var(--font-poppins);
+  --body-font:  var(--font-poppins);
+  --header-transform: none;
+}
+
+body[data-theme='fancy'] {
+  --header-font: var(--font-marhey);
+  --body-font: var(--font-sono);
+  --header-transform: none;
+}

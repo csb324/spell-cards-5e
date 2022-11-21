@@ -62,14 +62,13 @@ function SpellNameField({
   allSrdSpells: SrdType[]
 }) {
   const [value, setValue] = useState(initialValue);
-  const [showSuggestions, setShowSuggestions] = useState(false);
+  const [showSuggestions, setShowSuggestions] = useState(initialValue.length === 0);
 
   const acceptSuggestion = (srd: SrdType) => {
     setValue(srd.name);
     const srdData = SpellApiService.get(srd.index);
     srdData.then((data: SpellType) => {
-      setAll(data); 
-      console.log(data);
+      setAll(data, true); 
     })
     setShowSuggestions(false);
   }

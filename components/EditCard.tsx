@@ -64,7 +64,7 @@ function EditCard({
   const setRichText = (k: ValidRichKeys) => {
     return (newDesc: ContentState) => {
       const newData = {...cardData};
-      newData[k] = newDesc.getPlainText('\n');
+      newData[k] = newDesc.getPlainText('/n');
       save(newData);
     }
   }

@@ -2,28 +2,42 @@
   width: 240px;
   height: 336px;
 
-  border: 3px solid;
+  border: 3px solid var(--color);
+  border-bottom: 1px solid var(--color);
   text-align: center;
   display: flex;
   flex-direction: column;
+  font-family: var(--body-font);
+}
+
+.inverted {
+  background-color: var(--color);
+  color: #ffffff;
 }
 
 .spellName {
   font-size: 16px;
-  border-bottom: 1px solid;
+  border-bottom: 1px solid var(--color);
+  font-family: var(--header-font);
+  text-transform: var(--header-transform);
 }
 
 .spellType {
   font-size: 10px;
-  border-bottom: 1px solid;
+  /* border-bottom: 1px solid var(--color); */
+  background-color: var(--color);
+  color: #ffffff;
 }
 
 .meta {
   display: flex;
   flex-wrap: wrap;
+  border-bottom: 1px solid var(--color);
 }
 .metaBox {
   width: 50%;
+  border: 1px solid var(--color)
+
 }
 
 .metaLabel {
@@ -37,7 +51,7 @@
 .details {
   padding: 3px 8px;
   text-align: justify;
-  font-size: 9px;
+  font-size: var(--text-size);
   flex-grow: 1;
 
   display: flex;
