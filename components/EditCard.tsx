@@ -1,13 +1,17 @@
-import { ChangeEvent, ChangeEventHandler, useState } from "react";
-import { ContentState, EditorState } from 'draft-js';
-import { SpellType, SrdType } from "../utils/models";
+import { ChangeEvent, ChangeEventHandler } from "react";
+import { SpellType } from "../utils/models";
 import SpellDescriptionField from "./SpellDescriptionField";
 import SpellNameField from "./SpellNameField";
+import { useAppDispatch, useAppSelector } from "../stores/hooks";
+import { editCard } from "../stores/uiStateReducer";
+// import { edit } from "../stores/cardsReducer";
 
-type ValidStringKeys = 
-  'name' | 'schoolOfMagic' | 'higherLevelDesc' | 'range' | 'castingTime' | 'duration';
-
-type ValidRichKeys = 'desc' | 'higherLevelDesc';
+type ValidStringKeys = 'name' 
+  | 'schoolOfMagic' 
+  | 'higherLevelDesc' 
+  | 'range' 
+  | 'castingTime' 
+  | 'duration';
 
 function FormField({
   title,
@@ -28,56 +32,23 @@ function FormField({
   )
 }
 
-function EditCard({
-  cardData,
-  save,
-  allSrdSpells,
-  editorState,
-  setEditorState,
-  higherLevelEditorState,
-  setHigherLevelEditorState
-}: {
-  cardData: SpellType,
-  save: Function,
-  allSrdSpells: SrdType[],
-  editorState: EditorState,
-  setEditorState: Function,
-  higherLevelEditorState: EditorState,
-  setHigherLevelEditorState: Function
-}) {
+function EditCard() {
+  const dispatch = useAppDispatch();
+  const cardData = useAppSelector((state) => state.ui.activeCardData);
 
   const setString = (key: ValidStringKeys): ChangeEventHandler => {
     const setFunction: ChangeEventHandler = (event: ChangeEvent<HTMLInputElement>) => {
       const newData = { ...cardData};
       newData[key] = event.target.value;
-      save(newData);
+      dispatch(editCard(newData));
     }
     return setFunction;
   }
 
-  const setName = (newName: string) => {
-    const newData = {...cardData};
-    newData.name = newName;
-    save(newData);
-  }
-
-  const setRichText = (k: ValidRichKeys) => {
-    return (newDesc: ContentState) => {
-      const newData = {...cardData};
-      newData[k] = newDesc.getPlainText('/n');
-      save(newData);
-    }
-  }
-
   return (
     <div className="edit">
-      <SpellNameField 
-        initialValue={cardData.name} 
-        setName={ setName }
-        setAll={ save } 
-        allSrdSpells={allSrdSpells}
-      />
-      
+      <SpellNameField />
+
       <FormField 
         title="Range" 
         identifier="range" 
@@ -96,22 +67,17 @@ function EditCard({
         value={cardData.duration} 
         onChange={ setString('duration') } 
       />
-
-      <SpellDescriptionField 
+{/* 
+      <SpellDescriptionField
         title="Spell Description"
-        spellDesc={cardData.desc} 
-        updateSpellDesc={setRichText('desc')}
-        editorState={editorState}
-        setEditorState={setEditorState}
+        spellDesc={cardData.desc}
       />
 
       <SpellDescriptionField
         title="At higher levels?"
         spellDesc={cardData.higherLevelDesc || ''} 
-        updateSpellDesc={setRichText('higherLevelDesc')}
-        editorState={higherLevelEditorState}
-        setEditorState={setHigherLevelEditorState}
-      />
+      /> */}
+
     </div>
   )
 }

@@ -1,17 +1,21 @@
-import { SpellType } from "../utils/models";
+import { useDispatch, useSelector } from "react-redux";
+import { add } from "../stores/cardsReducer";
+import { set } from "../stores/uiStateReducer";
+import { RootState } from "../stores/rootReducer";
+import { blankCard } from "../utils/constants";
+
 import Card from "./Card";
 
-function AllCards({
-  cardsData,
-  selectFunction,
-  addCard
-}: {
-  cardsData: SpellType[],
-  selectFunction: Function,
-  addCard: Function
-}) {
+function AllCards() {
+  const cardsData = useSelector((state: RootState) => state.cards.list);
+  const dispatch = useDispatch();
+
+  const addCard = () => {
+    dispatch(add(blankCard));
+  }
+  
   const cards = cardsData.map((c, index) => (
-    <Card key={c.name} spell={c} select={selectFunction(index)} isActive={ false }/>
+    <Card key={c.name} spell={c} select={() => { dispatch(set(index)) }} isActive={ false }/>
   ));
 
   return(

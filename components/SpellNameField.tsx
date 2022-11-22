@@ -1,4 +1,6 @@
 import { ChangeEvent, ChangeEventHandler, useState } from "react";
+import { useAppDispatch, useAppSelector } from "../stores/hooks";
+import { editCard } from "../stores/uiStateReducer";
 import { SpellType, SrdType } from "../utils/models"
 import SpellApiService from "../utils/SpellApiService";
 
@@ -50,40 +52,39 @@ function SuggestedSpells({
   )
 }
 
-function SpellNameField({
-  initialValue,
-  setAll,
-  setName,
-  allSrdSpells
-}: {
-  initialValue: string,
-  setAll: Function,
-  setName: Function,
-  allSrdSpells: SrdType[]
-}) {
-  const [value, setValue] = useState(initialValue);
-  const [showSuggestions, setShowSuggestions] = useState(initialValue.length === 0);
+function SpellNameField() {
+  const cardData = useAppSelector((state) => state.ui.activeCardData);
+  const dispatch = useAppDispatch();
+  const [showSuggestions, setShowSuggestions] = useState(cardData.name.length === 0);
+
+  const setName = (newName: string) => {
+    const newData = {...cardData};
+    newData.name = newName;
+    dispatch(editCard(newData));
+  }
+
 
   const acceptSuggestion = (srd: SrdType) => {
-    setValue(srd.name);
+    setName(srd.name);
     const srdData = SpellApiService.get(srd.index);
     srdData.then((data: SpellType) => {
-      setAll(data, true); 
+      dispatch(editCard(data));
     })
     setShowSuggestions(false);
   }
 
   const onChange: ChangeEventHandler = (event: ChangeEvent<HTMLInputElement>) => {
     setShowSuggestions(true);
-    setValue(event.target.value);
     setName(event.target.value);
   }
+
+  const allSrdSpells: SrdType[] = [];
 
   return (
     <>
       <label className="font-bold" htmlFor='name'>Spell Name</label>
-      <input value={ value } className="border block px-1" type="text" name='name' onChange={ onChange } />
-      { showSuggestions && <SuggestedSpells input={ value } allSrdSpells={ allSrdSpells } acceptSuggestion={ acceptSuggestion } /> }
+      <input value={ cardData.name } className="border block px-1" type="text" name='name' onChange={ onChange } />
+      { showSuggestions && <SuggestedSpells input={ cardData.name } allSrdSpells={ allSrdSpells } acceptSuggestion={ acceptSuggestion } /> }
     </>
   )
 
