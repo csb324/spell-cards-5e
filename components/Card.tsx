@@ -1,5 +1,5 @@
 import { TiEdit } from 'react-icons/ti';
-import { GiSandsOfTime, GiCoolSpices, GiCrosshair, GiTrashCan, GiPencil, GiHighlighter } from 'react-icons/gi';
+import { GiSandsOfTime, GiCoolSpices, GiCrosshair, GiTrashCan, GiArrowDunk, GiHighlighter } from 'react-icons/gi';
 import { BiTime } from 'react-icons/bi';
 
 import { SpellType, Theme } from '../utils/models';
@@ -22,10 +22,12 @@ const themeMap: Record<Theme, Record<string, string>> = {
 function Card({
   spell,
   select,
+  remove,
   isActive
 }: {
   spell: SpellType,
   select: Function,
+  remove: Function,
   isActive: boolean
 }) {
   const theme = useAppSelector((state) => state.ui.theme);
@@ -48,7 +50,7 @@ function Card({
       <button title={`Edit ${name}`} className="text-4xl mr-5 text-blue-900" onClick={() => select()}>
         <GiHighlighter/>
       </button>
-      <button title={`Delete ${name}`} className="text-5xl text-red-700" onClick={() => select()}>
+      <button title={`Delete ${name}`} className="text-5xl text-red-700" onClick={() => remove()}>
         <GiTrashCan/>
       </button>
 
@@ -66,7 +68,7 @@ function Card({
   const labels: Record<string, Record<LabelKey, string | ReactNode>> = {
     range: {
       'text': "Range",
-      'icon': <GiCrosshair />
+      'icon': <GiArrowDunk />
     },
     time: {
       'text': "Casting Time",
@@ -107,7 +109,7 @@ function Card({
             <p className={styles.metaInfo}>
               { verbal ? <span>V</span> : ''}
               { somatic ? <span>S</span> : ''}
-              { material ? <span>M ({components.materialDesc})</span> : ''}
+              { material ? <span>M ({materialDesc})</span> : ''}
             </p>
           </div>
           <div className={styles.metaBox}>

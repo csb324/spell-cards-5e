@@ -31,7 +31,7 @@ const SpellApiService = {
       verbal: apiResponse["components"].includes('V'),
       somatic: apiResponse["components"].includes('S'),
       material: apiResponse["components"].includes('M'),
-      materialDesc: apiResponse["material"] || ''
+      materialDesc: apiResponse["material"] ? apiResponse["material"].replace(/^\.+|\.+$/g, '') : ''
     }
     const damageAtCharacterLevel = SpellApiService.convertDamagePerLevel(apiResponse);
     

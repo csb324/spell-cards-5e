@@ -1,5 +1,4 @@
-import { useDispatch, useSelector } from "react-redux";
-import { add } from "../stores/cardsReducer";
+import { remove } from "../stores/cardsReducer";
 import { RootState } from "../stores/rootReducer";
 import { createNewCard, setActiveCardCreator } from "../stores/thunks";
 import { useAppDispatch, useAppSelector } from "../stores/hooks";
@@ -13,7 +12,7 @@ function AllCards() {
   const cards = cardsData.map((c, index) => {
     const selector = setActiveCardCreator(index);
     return (
-      <Card key={c.name} spell={c} select={() => { dispatch(selector) }} isActive={ false }/>
+      <Card key={c.name} spell={c} select={() => { dispatch(selector) }} remove={() => dispatch(remove(index))} isActive={ false }/>
     )
   });
 
