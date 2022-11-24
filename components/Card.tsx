@@ -1,5 +1,5 @@
 import { TiEdit } from 'react-icons/ti';
-import { GiSandsOfTime, GiCoolSpices, GiCrosshair } from 'react-icons/gi';
+import { GiSandsOfTime, GiCoolSpices, GiCrosshair, GiTrashCan, GiPencil, GiHighlighter } from 'react-icons/gi';
 import { BiTime } from 'react-icons/bi';
 
 import { SpellType, Theme } from '../utils/models';
@@ -44,9 +44,16 @@ function Card({
   }
 
   const activeButton = !isActive && (
-    <button title="select me" className="print:hidden absolute top-0 right-0" onClick={() => select()}>
-      <TiEdit/>
-    </button>
+    <div className='card-overlay print:hidden text-center pt-10 absolute top-0 right-0 left-0 bottom-0 hover:bg-slate-100 hover:bg-opacity-90 opacity-0 hover:opacity-100'>
+      <button title={`Edit ${name}`} className="text-4xl mr-5 text-blue-900" onClick={() => select()}>
+        <GiHighlighter/>
+      </button>
+      <button title={`Delete ${name}`} className="text-5xl text-red-700" onClick={() => select()}>
+        <GiTrashCan/>
+      </button>
+
+    </div>
+
   );
 
   const higherLevelContainer = spell.higherLevelDesc && (
@@ -78,7 +85,9 @@ function Card({
 
   return (
     <div className={`relative mt-1 mb-1 mr-1 print:m-0 ${ isActive ? 'border-blue-600' : ''}`}>
+
       { activeButton }
+
       <div className={styles.Card}>
         <h1 className={styles.spellName}>{name || "&nbsp;" }</h1>
         <div className={styles.meta}>
