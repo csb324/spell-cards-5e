@@ -11,8 +11,8 @@ export const blankCard: SpellType = {
   concentration: false,
   castingTime: '1 action',
   components: {
-    verbal: false,
+    verbal: true,
     somatic: false,
-    material: true
+    material: false
   }
 }
