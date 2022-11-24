@@ -1,10 +1,8 @@
 import { ChangeEvent, ChangeEventHandler } from "react";
-import { SpellType } from "../utils/models";
 import SpellDescriptionField from "./SpellDescriptionField";
 import SpellNameField from "./SpellNameField";
 import { useAppDispatch, useAppSelector } from "../stores/hooks";
-import { editCard } from "../stores/uiStateReducer";
-// import { edit } from "../stores/cardsReducer";
+import { updateActiveCard } from "../stores/uiStateReducer";
 
 type ValidStringKeys = 'name' 
   | 'schoolOfMagic' 
@@ -40,7 +38,7 @@ function EditCard() {
     const setFunction: ChangeEventHandler = (event: ChangeEvent<HTMLInputElement>) => {
       const newData = { ...cardData};
       newData[key] = event.target.value;
-      dispatch(editCard(newData));
+      dispatch(updateActiveCard(newData));
     }
     return setFunction;
   }
@@ -67,16 +65,18 @@ function EditCard() {
         value={cardData.duration} 
         onChange={ setString('duration') } 
       />
-{/* 
+
       <SpellDescriptionField
         title="Spell Description"
-        spellDesc={cardData.desc}
+        currentStatus={cardData.desc}
+        propName="desc"
       />
 
       <SpellDescriptionField
         title="At higher levels?"
-        spellDesc={cardData.higherLevelDesc || ''} 
-      /> */}
+        currentStatus={cardData.higherLevelDesc || ''}
+        propName="higherLevelDesc"
+      />
 
     </div>
   )

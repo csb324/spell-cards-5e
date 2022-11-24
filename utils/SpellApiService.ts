@@ -1,8 +1,13 @@
-import { SpellType  } from "./models";
+import { SpellType, SrdType  } from "./models";
+
+type SrdSpellsReponse = {
+  results: SrdType[],
+  count: number
+}
 
 const SpellApiService = {
 
-  getList: async () => {
+  getList: async (): Promise<SrdSpellsReponse> => {
     const list = await fetch('https://www.dnd5eapi.co/api/spells');
     return list.json();
   },
@@ -25,15 +30,16 @@ const SpellApiService = {
     const components = {
       verbal: apiResponse["components"].includes('V'),
       somatic: apiResponse["components"].includes('S'),
-      material: apiResponse["components"].includes('M')
+      material: apiResponse["components"].includes('M'),
+      materialDesc: apiResponse["material"] || ''
     }
     const damageAtCharacterLevel = SpellApiService.convertDamagePerLevel(apiResponse);
     
     const convertedSpell = {
       name: apiResponse["name"],
       level: apiResponse["level"],
-      desc: apiResponse["desc"].join("/n"),
-      higherLevelDesc: apiResponse["higher_level"].join("/n"),
+      desc: apiResponse["desc"].join("\n"),
+      higherLevelDesc: apiResponse["higher_level"].join("\n"),
       schoolOfMagic: apiResponse["school"]["name"],
       range: apiResponse["range"],
       duration: apiResponse["duration"],

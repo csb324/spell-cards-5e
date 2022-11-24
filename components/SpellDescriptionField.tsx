@@ -1,31 +1,46 @@
-import React, { useState } from 'react';
-import {Editor, EditorState, ContentState} from 'draft-js';
+import React, { useEffect, useState } from 'react';
+import { ContentState, Editor, EditorState } from 'draft-js';
 import 'draft-js/dist/Draft.css';
+
+import { useAppDispatch } from '../stores/hooks';
+import { updateRichTextThunkCreator } from '../stores/thunks';
+import { ValidRichTextKeys } from '../utils/models';
 
 function SpellDescriptionField({
   title,
-  editorState,
-  updateSpellDesc,
-  setEditorState
+  currentStatus,
+  propName
 }: {
   title: string,
-  spellDesc: string,
-  updateSpellDesc: Function,
-  editorState: EditorState,
-  setEditorState: Function
+  currentStatus: string,
+  propName: ValidRichTextKeys
 }) {
+  const dispatch = useAppDispatch();
 
-  const onChange = (something: EditorState) => {
-    setEditorState(something);
-    const newContent = editorState.getCurrentContent();
-    updateSpellDesc(newContent);
+  const [editorState, setEditorState] = useState(() => {
+    if(currentStatus && currentStatus.length > 0) {
+      return EditorState.createWithContent(ContentState.createFromText(currentStatus, '\n'));
+    }
+    return EditorState.createEmpty();
+  });
+  const [iEdited, setIEdited] = useState(false);
+
+  useEffect(() => {
+    if(!iEdited) {
+      setEditorState(EditorState.createWithContent(ContentState.createFromText(currentStatus, '\n')));
+    }
+  }, [currentStatus]);
+
+  const onChange = (newValue: EditorState) => {
+    dispatch(updateRichTextThunkCreator(propName, newValue))
+    setEditorState(newValue);
   }
 
   return (
     <>
       <label className="font-bold" >{title}</label>
       <div className="border block">
-        <Editor editorState={editorState} onChange={onChange} />
+        <Editor onFocus={() => setIEdited(true)} onBlur={() => setIEdited(false)} editorState={editorState} onChange={onChange} />
       </div>
     </>
   );

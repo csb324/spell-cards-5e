@@ -1,22 +1,14 @@
-import { edit } from '../stores/cardsReducer';
 import { useAppDispatch, useAppSelector } from '../stores/hooks';
-import { reset } from '../stores/uiStateReducer';
 import Card from "./Card";
 import EditCard from "./EditCard";
-
+import { finishEditing } from '../stores/thunks';
 
 function OneCard() {  
   const dispatch = useAppDispatch();
   const card = useAppSelector((state) => state.ui.activeCardData);
-  const activeIndex = useAppSelector((state) => state.ui.activeCard);
-
 
   const goBack = () => {
-    dispatch(edit({
-      index: activeIndex,
-      card: card
-    }))
-    dispatch(reset());
+    dispatch(finishEditing);
   }
 
   return (

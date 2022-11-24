@@ -13,8 +13,8 @@ font-family: 'Poppins', sans-serif;
 font-family: 'Sono', sans-serif; */
 
 body[data-theme='basic'] {
-  --header-font: var(--font-poppins);
-  --body-font:  var(--font-poppins);
+  --header-font: var(--font-overpass);
+  --body-font:  var(--font-overpass);
   --header-transform: none;
 }
 
@@ -22,4 +22,14 @@ body[data-theme='fancy'] {
   --header-font: var(--font-marhey);
   --body-font: var(--font-sono);
   --header-transform: none;
+}
+
+body[data-theme='modern'] {
+  --header-font: var(--font-overpass);
+  --body-font: var(--font-overpass);
+}
+
+body[data-theme='fantasy'] {
+  --header-font: var(--font-cormorant);
+  --body-font: var(--font-cormorant);
 }

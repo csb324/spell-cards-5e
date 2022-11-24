@@ -1,13 +1,14 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { blankCard } from "../utils/constants";
-import { SpellType } from "../utils/models";
-// import { RootState } from "./rootReducer";
+import { SpellType, SrdType, Theme } from "../utils/models";
 
 const uiSlice = createSlice({
   name: 'ui',
   initialState: {
     activeCard: -1,
-    activeCardData: blankCard
+    activeCardData: blankCard,
+    srdSpells: [] as SrdType[],
+    theme: 'fantasy' as Theme
   },
   reducers: {
     set: (state, action: PayloadAction<number>) => {
@@ -17,12 +18,24 @@ const uiSlice = createSlice({
       state.activeCard = -1;
       state.activeCardData = blankCard;
     },
-    editCard: (state, action: PayloadAction<SpellType>) => {
+    updateActiveCard: (state, action: PayloadAction<SpellType>) => {
       state.activeCardData = action.payload;
+    },
+    setSpells: (state, action: PayloadAction<SrdType[]>) => {
+      state.srdSpells = action.payload;
+    },
+    setTheme: (state, action: PayloadAction<Theme>) => {
+      state.theme = action.payload;
     }
   }
 });
 
+export const { 
+  set, 
+  reset, 
+  updateActiveCard, 
+  setSpells,
+  setTheme
+} = uiSlice.actions;
 
-export const { set, reset, editCard } = uiSlice.actions;
 export default uiSlice.reducer;

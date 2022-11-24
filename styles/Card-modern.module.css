@@ -1,0 +1,65 @@
+.Card {
+  width: 240px;
+  height: 336px;
+  border: 1px solid var(--color);
+  font-family: var(--body-font);
+  font-size: 10px;
+  padding: 4px 8px;
+  display: flex;
+  flex-direction: column;
+}
+
+.inverted {
+}
+
+.spellName {
+  font-size: 15px;
+  font-weight: 900;
+  line-height: 1.2;
+  margin-top: 2px;
+  order: -1;
+}
+
+.spellType {
+  font-size: 10px;
+  order: -1;
+  /* margin-bottom: 4px;r */
+}
+
+.meta {
+  border-bottom: 5px solid var(--color);
+  margin-bottom: 2px;
+}
+
+.metaBox {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--color);
+  line-height: 1;
+  padding-top: 4px;
+}
+
+.metaLabel {
+  font-weight: 700;
+}
+
+.metaInfo {
+}
+
+.details {
+  font-size: var(--text-size);
+
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.atHigherLabel {
+  font-weight: 900;
+  line-height: 1;
+  border-bottom: 1px solid var(--color);
+}
+
+.desc {
+  flex-grow: 1;
+}

@@ -7,8 +7,8 @@ interface DraftEditorState {
 }
 
 const initialState = { 
-  descriptionEditor: EditorState.createEmpty(), 
-  higherLevelEditor: EditorState.createEmpty() 
+  // descriptionEditor: EditorState.createEmpty(), 
+  // higherLevelEditor: EditorState.createEmpty() 
 } as DraftEditorState;
 
 const editorSlice = createSlice({
@@ -16,10 +16,10 @@ const editorSlice = createSlice({
   initialState,
   reducers: {
     updateDescription: (state, action: PayloadAction<EditorState>) => {
-      state.descriptionEditor = action.payload
+      // state.descriptionEditor = action.payload;
     },
     updateHigherLevel: (state, action: PayloadAction<EditorState>) => {
-      state.higherLevelEditor = action.payload;
+      // state.higherLevelEditor = action.payload;
     }
   }
 })

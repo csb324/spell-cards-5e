@@ -1,8 +1,11 @@
 export type ComponentType = {
   verbal: boolean,
   somatic: boolean,
-  material: boolean
+  material: boolean,
+  materialDesc?: string
 }
+
+export type Theme = 'basic' | 'fancy' | 'modern' | 'fantasy';
 
 export type SpellType = {
   name: string,
@@ -27,3 +30,5 @@ export type SrdType = {
   name: string,
   url: string
 }
+
+export type ValidRichTextKeys = 'desc' | 'higherLevelDesc';
