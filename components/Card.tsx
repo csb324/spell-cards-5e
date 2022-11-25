@@ -91,12 +91,12 @@ function Card({
 
    
   return (
-    <div style={sizeStyle} className={`relative mt-1 mb-1 mr-1 print:m-0 ${ isActive ? 'border-blue-600' : ''}`}>
+    <div style={sizeStyle} className={`relative mt-2 mb-2 mr-2 print:m-2 print:mb-0 ${ isActive ? 'border-blue-600' : ''}`}>
 
       { activeButton }
 
       <div className={styles.Card}>
-        <h1 className={styles.spellName}>{name || "&nbsp;" }</h1>
+        <h1 className={styles.spellName}>{name || "New Spell" }</h1>
         <div className={styles.meta}>
           <div className={styles.metaBox}>
             <p className={styles.metaLabel}>{ labels.time[labelKey] }</p>

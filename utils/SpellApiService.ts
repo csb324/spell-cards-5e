@@ -1,3 +1,4 @@
+import { SchoolOfMagic } from "./constants";
 import { SpellType, SrdType  } from "./models";
 
 type SrdSpellsReponse = {
@@ -40,7 +41,7 @@ const SpellApiService = {
       level: apiResponse["level"],
       desc: apiResponse["desc"].join("\n"),
       higherLevelDesc: apiResponse["higher_level"].join("\n"),
-      schoolOfMagic: apiResponse["school"]["name"],
+      schoolOfMagic: apiResponse["school"]["name"].toLowerCase() as SchoolOfMagic,
       range: apiResponse["range"],
       duration: apiResponse["duration"],
       ritual: apiResponse["ritual"],

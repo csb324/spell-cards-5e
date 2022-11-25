@@ -20,7 +20,7 @@ function AllCards() {
   return(
     <>
       <button className="print:hidden px-3 rounded-md bg-blue-700 text-white" onClick={() => dispatch(createNewCard())}>add</button>
-      <div className="flex-wrap flex justify-between">
+      <div className="flex-wrap flex">
         { cards }
       </div>
     </>

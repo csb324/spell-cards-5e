@@ -8,7 +8,6 @@
   flex-direction: column;
   font-family: var(--body-font);
   padding: 0 8px;
-  margin-bottom: 5px;
 }
 
 .inverted {

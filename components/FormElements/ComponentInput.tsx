@@ -1,7 +1,6 @@
 import { ChangeEvent, ChangeEventHandler } from "react";
-import { useAppDispatch, useAppSelector } from "../stores/hooks";
-import { updateActiveCard } from "../stores/uiStateReducer";
-import { ComponentType } from "../utils/models";
+import { useAppDispatch, useAppSelector } from "../../stores/hooks";
+import { updateActiveCard } from "../../stores/uiStateReducer";
 import FormField from "./FormField";
 
 function ComponentInput() {
@@ -43,10 +42,8 @@ function ComponentInput() {
           value="verbal" 
           id="verbal" 
           checked={componentValue.verbal}
-          ></input>
+        ></input>
         <label className="ml-2" htmlFor="verbal">Verbal</label>
-      </div>
-      <div>
         <input 
           onChange={componentChange('somatic')} 
           type="checkbox" 
@@ -54,10 +51,9 @@ function ComponentInput() {
           value="somatic" 
           id="somatic" 
           checked={componentValue.somatic}
+          className="ml-2"
           ></input>
         <label className="ml-2" htmlFor="somatic">Somatic</label>
-      </div>
-      <div>
         <input 
           onChange={componentChange('material')} 
           type="checkbox" 
@@ -65,6 +61,8 @@ function ComponentInput() {
           value="material" 
           id="material" 
           checked={componentValue.material}
+          className="ml-2"
+
           ></input>
         <label className="ml-2" htmlFor="material">Material</label>
       </div>

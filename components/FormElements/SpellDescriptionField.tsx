@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { ContentState, Editor, EditorState } from 'draft-js';
 import 'draft-js/dist/Draft.css';
 
-import { useAppDispatch } from '../stores/hooks';
-import { updateRichTextThunkCreator } from '../stores/thunks';
-import { ValidRichTextKeys } from '../utils/models';
+import { useAppDispatch } from '../../stores/hooks';
+import { updateRichTextThunkCreator } from '../../stores/thunks';
+import { ValidRichTextKeys } from '../../utils/models';
 
 function SpellDescriptionField({
   title,

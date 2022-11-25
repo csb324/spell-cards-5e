@@ -1,3 +1,5 @@
+import { SchoolOfMagic } from "./constants";
+
 export type ComponentType = {
   verbal: boolean,
   somatic: boolean,
@@ -10,7 +12,7 @@ export type Theme = 'basic' | 'fancy' | 'modern' | 'fantasy';
 export type SpellType = {
   name: string,
   level: number,
-  schoolOfMagic: string,
+  schoolOfMagic: SchoolOfMagic,
   
   desc: string,
   higherLevelDesc?: string,

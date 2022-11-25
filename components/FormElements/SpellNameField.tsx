@@ -1,8 +1,8 @@
 import { ChangeEvent, ChangeEventHandler, useState } from "react";
-import { useAppDispatch, useAppSelector } from "../stores/hooks";
-import { acceptSuggestionThunk, fetchSpells } from "../stores/thunks";
-import { updateActiveCard } from "../stores/uiStateReducer";
-import { SrdType } from "../utils/models"
+import { useAppDispatch, useAppSelector } from "../../stores/hooks";
+import { acceptSuggestionThunk, fetchSpells } from "../../stores/thunks";
+import { updateActiveCard } from "../../stores/uiStateReducer";
+import { SrdType } from "../../utils/models"
 
 function SuggestedSpells({
   input,

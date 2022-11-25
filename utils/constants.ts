@@ -1,9 +1,21 @@
 import { SpellType } from "./models"
 
+export enum SchoolOfMagic {
+  abjuration = 'Abjuration',
+  conjuration = 'Conjuration',
+  divination = 'Divination',
+  enchantment = 'Enchantment',
+  evocation = 'Evocation',
+  illusion = 'Illusion',
+  necromancy = 'Necromancy',
+  transmutation = 'Transmutation',
+  other = 'Other'
+}
+
 export const blankCard: SpellType = {
   name: '',
   level: 0,
-  schoolOfMagic: '',
+  schoolOfMagic: SchoolOfMagic.other,
   desc: '',
   range: 'Self',
   duration: 'Instantaneous',

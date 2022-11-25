@@ -1,14 +1,14 @@
-import { ChangeEvent, ChangeEventHandler } from "react";
-import SpellDescriptionField from "./SpellDescriptionField";
-import SpellNameField from "./SpellNameField";
+import { ChangeEvent, ChangeEventHandler, useState } from "react";
+import SpellDescriptionField from "./FormElements/SpellDescriptionField";
+import SpellNameField from "./FormElements/SpellNameField";
 import { useAppDispatch, useAppSelector } from "../stores/hooks";
 import { updateActiveCard } from "../stores/uiStateReducer";
 import { buttonClasses, SIZE_MAXIMUM, SIZE_MINIMUM } from "../utils/constants";
-import FormField from "./FormField";
-import ComponentInput from "./ComponentInput";
+import FormField from "./FormElements/FormField";
+import ComponentInput from "./FormElements/ComponentInput";
+import SpellTypeInput from "./FormElements/SpellTypeInput";
 
 type ValidStringKeys = 'name' 
-  | 'schoolOfMagic' 
   | 'higherLevelDesc' 
   | 'range' 
   | 'castingTime' 
@@ -17,6 +17,7 @@ type ValidStringKeys = 'name'
 function EditCard() {
   const dispatch = useAppDispatch();
   const cardData = useAppSelector((state) => state.ui.activeCardData);
+  const [metaOpen, setMetaOpen] = useState(false);
 
   const setString = (key: ValidStringKeys): ChangeEventHandler => {
     const setFunction: ChangeEventHandler = (event: ChangeEvent<HTMLInputElement>) => {
@@ -25,6 +26,14 @@ function EditCard() {
       dispatch(updateActiveCard(newData));
     }
     return setFunction;
+  }
+
+  const setConcentration = (event: ChangeEvent<HTMLInputElement>) => {
+    const newData = {
+      ...cardData,
+      concentration: event.target.checked
+    }
+    dispatch(updateActiveCard(newData));
   }
 
   const incrementSize = () => {
@@ -51,28 +60,56 @@ function EditCard() {
     <div className="edit font-sans">
       <SpellNameField />
 
-      <FormField 
-        title="Casting Time" 
-        value={cardData.castingTime} 
-        identifier="castingTime" 
-        onChange={ setString('castingTime') } 
-      />
+      <div className="bg-slate-100 p-2 my-3 rounded-md">
+        <button className="w-full text-left hover:text-blue-700" onClick={() => setMetaOpen(!metaOpen)}>
+          <h3 className="h3 font-mono">Meta Info</h3>
+        </button>
+        { metaOpen && (
+        <div>
+          <SpellTypeInput />
 
-      <FormField 
-        title="Range" 
-        identifier="range" 
-        value={cardData.range} 
-        onChange={ setString('range') } 
-      />
+          <FormField 
+            title="Casting Time" 
+            value={cardData.castingTime} 
+            identifier="castingTime" 
+            onChange={ setString('castingTime') } 
+          />
 
-      <ComponentInput />
+          <FormField 
+            title="Range" 
+            identifier="range" 
+            value={cardData.range} 
+            onChange={ setString('range') } 
+          />
 
-      <FormField 
-        title="Duration" 
-        identifier="duration" 
-        value={cardData.duration} 
-        onChange={ setString('duration') } 
-      />
+          <ComponentInput />
+          <div className="flex items-center">
+            <div>
+              <FormField 
+                title="Duration" 
+                identifier="duration"
+                value={cardData.duration} 
+                onChange={ setString('duration') } 
+              />
+            </div>
+            <div className="pt-3">
+              <input 
+                onChange={setConcentration} 
+                type="checkbox" 
+                name="concentration" 
+                value="concentration" 
+                id="concentration" 
+                checked={cardData.concentration}
+                className="ml-2"
+                ></input>
+              <label className="ml-2" htmlFor="concentration">Concentration</label>
+            </div>
+          </div>
+        </div>
+        )}
+
+      </div>
+
 
       <div>
         <button title="Decrease text size" onClick={decrementSize} className={buttonClasses}>-</button>
