@@ -111,7 +111,8 @@ function EditCard() {
       </div>
 
 
-      <div>
+      <div className="border-slate-100 border p-2 my-3 rounded-md">
+        <span className="font-mono mr-2">Text size:</span>
         <button title="Decrease text size" onClick={decrementSize} className={buttonClasses}>-</button>
         <button title="Increase text size" onClick={incrementSize} className={buttonClasses}>+</button>
       </div>

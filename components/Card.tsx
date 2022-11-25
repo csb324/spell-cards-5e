@@ -54,9 +54,7 @@ function Card({
       <button title={`Delete ${name}`} className="text-5xl text-red-700" onClick={() => remove()}>
         <GiTrashCan/>
       </button>
-
     </div>
-
   );
 
   const higherLevelContainer = spell.higherLevelDesc && (
