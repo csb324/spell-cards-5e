@@ -1,9 +1,10 @@
 import { remove } from "../stores/cardsReducer";
 import { RootState } from "../stores/rootReducer";
-import { createNewCard, setActiveCardCreator } from "../stores/thunks";
 import { useAppDispatch, useAppSelector } from "../stores/hooks";
 
+
 import Card from "./Card";
+import { createNewCard, setActiveCardCreator } from "../stores/thunks";
 
 function AllCards() {
   const cardsData = useAppSelector((state: RootState) => state.cards.list);
@@ -18,7 +19,7 @@ function AllCards() {
 
   return(
     <>
-      <button className="print:hidden px-3 bg-blue-700 text-white" onClick={() => dispatch(createNewCard())}>add</button>
+      <button className="print:hidden px-3 rounded-md bg-blue-700 text-white" onClick={() => dispatch(createNewCard())}>add</button>
       <div className="flex-wrap flex justify-between">
         { cards }
       </div>

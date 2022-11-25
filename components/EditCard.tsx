@@ -3,6 +3,9 @@ import SpellDescriptionField from "./SpellDescriptionField";
 import SpellNameField from "./SpellNameField";
 import { useAppDispatch, useAppSelector } from "../stores/hooks";
 import { updateActiveCard } from "../stores/uiStateReducer";
+import { buttonClasses, SIZE_MAXIMUM, SIZE_MINIMUM } from "../utils/constants";
+import FormField from "./FormField";
+import ComponentInput from "./ComponentInput";
 
 type ValidStringKeys = 'name' 
   | 'schoolOfMagic' 
@@ -10,25 +13,6 @@ type ValidStringKeys = 'name'
   | 'range' 
   | 'castingTime' 
   | 'duration';
-
-function FormField({
-  title,
-  identifier,
-  value,
-  onChange
-}: {
-  title: string,
-  identifier: string,
-  value: string,
-  onChange: ChangeEventHandler
-}) {
-  return (
-    <>
-      <label className="font-bold" htmlFor={ identifier }>{ title }</label>
-      <input value={ value } className="border block mb-3 px-1" type="text" name={identifier} onChange={ onChange } />
-    </>
-  )
-}
 
 function EditCard() {
   const dispatch = useAppDispatch();
@@ -43,9 +27,36 @@ function EditCard() {
     return setFunction;
   }
 
+  const incrementSize = () => {
+    if(cardData.descSize >= SIZE_MAXIMUM) {
+      return;
+    }
+    const newData = {...cardData}
+    newData.descSize++;
+    dispatch(updateActiveCard(newData))
+  }
+
+  const decrementSize = () => {
+    if(cardData.descSize <= SIZE_MINIMUM) {
+      return;
+    }
+
+    const newData = {...cardData}
+    newData.descSize--;
+    dispatch(updateActiveCard(newData))
+  }
+
+
   return (
-    <div className="edit">
+    <div className="edit font-sans">
       <SpellNameField />
+
+      <FormField 
+        title="Casting Time" 
+        value={cardData.castingTime} 
+        identifier="castingTime" 
+        onChange={ setString('castingTime') } 
+      />
 
       <FormField 
         title="Range" 
@@ -53,18 +64,20 @@ function EditCard() {
         value={cardData.range} 
         onChange={ setString('range') } 
       />
-      <FormField 
-        title="Casting Time" 
-        value={cardData.castingTime} 
-        identifier="castingTime" 
-        onChange={ setString('castingTime') } 
-      />
+
+      <ComponentInput />
+
       <FormField 
         title="Duration" 
         identifier="duration" 
         value={cardData.duration} 
         onChange={ setString('duration') } 
       />
+
+      <div>
+        <button title="Decrease text size" onClick={decrementSize} className={buttonClasses}>-</button>
+        <button title="Increase text size" onClick={incrementSize} className={buttonClasses}>+</button>
+      </div>
 
       <SpellDescriptionField
         title="Spell Description"

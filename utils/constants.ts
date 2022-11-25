@@ -14,5 +14,11 @@ export const blankCard: SpellType = {
     verbal: true,
     somatic: false,
     material: false
-  }
+  },
+  descSize: 10
 }
+
+export const buttonClasses = "bg-slate-300 text-sm px-3 rounded-md font-sans uppercase mr-1 overflow-hidden";
+  
+export const SIZE_MAXIMUM = 16;
+export const SIZE_MINIMUM = 7;

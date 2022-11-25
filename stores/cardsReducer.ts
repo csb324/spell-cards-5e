@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { blankCard } from "../utils/constants";
 import { SpellType } from "../utils/models";
 
 interface CardsState {
@@ -13,7 +14,12 @@ type EditPayload = {
 const cardsSlice = createSlice({
   name: 'cards',
   initialState: {
-    list: []
+    list: [
+      {
+        ...blankCard,
+        name: 'Your Spell'
+      }
+    ]
   } as CardsState,
   reducers: {
     add: (state, action: PayloadAction<SpellType>) => {

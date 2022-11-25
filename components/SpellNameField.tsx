@@ -2,7 +2,7 @@ import { ChangeEvent, ChangeEventHandler, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../stores/hooks";
 import { acceptSuggestionThunk, fetchSpells } from "../stores/thunks";
 import { updateActiveCard } from "../stores/uiStateReducer";
-import { SpellType, SrdType } from "../utils/models"
+import { SrdType } from "../utils/models"
 
 function SuggestedSpells({
   input,
@@ -13,7 +13,7 @@ function SuggestedSpells({
   allSrdSpells: SrdType[],
   acceptSuggestion: Function,
 }) {
-  let message = 'start typing, and I\'ll look for your spell';
+  let message = 'Start typing, and I\'ll look for your spell';
   let possibleSpells: SrdType[] = [];
   if (input.length < 2) {
     possibleSpells = [];
@@ -86,8 +86,8 @@ function SpellNameField() {
 
   return (
     <>
-      <label className="font-bold" htmlFor='name'>Spell Name</label>
-      <input value={ cardData.name } className="border block px-1" type="text" name='name' onChange={ onChange } />
+      <label className="font-bold text-sm" htmlFor='name'>Spell Name</label>
+      <input value={ cardData.name } className="border w-full block px-1" type="text" name='name' onChange={ onChange } />
       { showSuggestions && <SuggestedSpells input={ cardData.name } allSrdSpells={ srdSpells } acceptSuggestion={ acceptSuggestion } /> }
     </>
   )

@@ -1,6 +1,7 @@
-import { TiEdit } from 'react-icons/ti';
-import { GiSandsOfTime, GiCoolSpices, GiCrosshair, GiTrashCan, GiArrowDunk, GiHighlighter } from 'react-icons/gi';
+import { GiSandsOfTime, GiCoolSpices, GiTrashCan, GiArrowDunk, GiHighlighter } from 'react-icons/gi';
 import { BiTime } from 'react-icons/bi';
+
+import CSS from 'csstype';
 
 import { SpellType, Theme } from '../utils/models';
 import fantasyStyles from '../styles/Card-fantasy.module.css';
@@ -82,11 +83,15 @@ function Card({
       text: 'Duration',
       'icon': <GiSandsOfTime />
     }
-
   }
 
+  const sizeStyle: CSS.Properties = {
+   ['--text-size' as any]: `${spell.descSize}px`
+  };
+
+   
   return (
-    <div className={`relative mt-1 mb-1 mr-1 print:m-0 ${ isActive ? 'border-blue-600' : ''}`}>
+    <div style={sizeStyle} className={`relative mt-1 mb-1 mr-1 print:m-0 ${ isActive ? 'border-blue-600' : ''}`}>
 
       { activeButton }
 

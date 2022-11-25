@@ -2,13 +2,13 @@ import React, { useState, useEffect } from "react";
 import { CompactPicker, ColorResult } from 'react-color';
 import { useAppDispatch, useAppSelector } from "../stores/hooks";
 import { setTheme } from "../stores/uiStateReducer";
+import { buttonClasses } from "../utils/constants";
 import { Theme } from "../utils/models";
 
 function ThemeChooser() {
-  // const [theme, setTheme] = useState('fantasy');
   const theme = useAppSelector((state) => state.ui.theme);
   const dispatch = useAppDispatch();
-  const [color, setColor] = useState('#ff0099');
+  const [color, setColor] = useState('#dddddd');
   const [colorOpen, setColorOpen] = useState(false);
 
   useEffect(() => {
@@ -27,6 +27,12 @@ function ThemeChooser() {
     setColorOpen(!colorOpen);
   }
 
+  const colorPicker = colorOpen && (
+    <div className="absolute left-0 top-5 z-10">
+      <CompactPicker color={color} onChangeComplete={setNewColor} />
+    </div>
+  )
+
   return (
     <>
       <style jsx global>{`
@@ -34,13 +40,19 @@ function ThemeChooser() {
             --color: ${color};
           }
         `}</style>
-      <div className="w-full print:hidden">
-        <button onClick={() => setAppTheme('basic')} className="w-16 bg-slate-400 mr-1">basic</button>
-        <button onClick={() => setAppTheme('fancy')} className="w-16 bg-slate-400 mr-1">fancy</button>
-        <button onClick={() => setAppTheme('modern')} className="w-16 bg-slate-400 mr-1">modern</button>
-        <button onClick={() => setAppTheme('fantasy')} className="w-16 bg-slate-400 mr-1">fantasy</button>
-        <button onClick={() => toggleColorOpen()} className="w-24 bg-[var(--color)] mr-1">pick color</button>
-        { colorOpen && <CompactPicker color={color} onChangeComplete={setNewColor} />}
+      <div className="w-full print:hidden mb-2 p-3 pt-1 rounded-sm bg-slate-100">
+        <p className="text-sm uppercase tracking-wide">Card Style</p>
+        <button onClick={() => setAppTheme('basic')} className={buttonClasses}>basic</button>
+        <button onClick={() => setAppTheme('fancy')} className={buttonClasses}>fancy</button>
+        <button onClick={() => setAppTheme('modern')} className={buttonClasses}>modern</button>
+        <button onClick={() => setAppTheme('fantasy')} className={buttonClasses}>fantasy</button>
+        <div className="relative inline-block">
+          <button onClick={() => toggleColorOpen()} className={buttonClasses}>
+            pick color
+            <span className="bg-[var(--color)] rounded-full h-2 w-2 -mr-1 ml-1 inline-block"></span>
+          </button>
+          { colorPicker }
+        </div>
         
       </div>
     </>

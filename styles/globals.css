@@ -2,8 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  --text-size: 9px;
+@layer base {
+  body {
+    font-family: var(--font-sono);
+    --text-size: 9px;
+  }
 }
 
 /* font-family: 'Lora', serif;
@@ -19,8 +22,8 @@ body[data-theme='basic'] {
 }
 
 body[data-theme='fancy'] {
-  --header-font: var(--font-marhey);
-  --body-font: var(--font-sono);
+  --header-font: var(--font-poppins);
+  --body-font: var(--font-poppins);
   --header-transform: none;
 }
 

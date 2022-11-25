@@ -22,7 +22,9 @@ export type SpellType = {
   
   concentration: boolean,
   damageAtCharacterLevel?: Record<number, string>,
-  components: ComponentType
+  components: ComponentType,
+
+  descSize: number
 }
 
 export type SrdType = {

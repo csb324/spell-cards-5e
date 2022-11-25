@@ -1,6 +1,6 @@
 import { EditorState } from "draft-js";
 import { blankCard } from "../utils/constants";
-import { SpellType, SrdType, ValidRichTextKeys } from "../utils/models";
+import { SrdType, ValidRichTextKeys } from "../utils/models";
 import SpellApiService from "../utils/SpellApiService";
 import { add, edit } from "./cardsReducer";
 import { RootState } from "./rootReducer";
@@ -54,8 +54,3 @@ export const fetchSpells = (): AppThunk => {
     dispatch(setSpells(spells.results));
   }
 }
-
-// export const fetchSpells = createAsyncThunk('srdSpells/fetch', async() => {
-//   const response = await SpellApiService.getList();
-//   return response;
-// })

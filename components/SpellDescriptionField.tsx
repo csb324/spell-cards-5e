@@ -38,8 +38,8 @@ function SpellDescriptionField({
 
   return (
     <>
-      <label className="font-bold" >{title}</label>
-      <div className="border block">
+      <label className="font-bold text-sm" >{title}</label>
+      <div className="border block px-2 py-1 mb-3 text-sm">
         <Editor onFocus={() => setIEdited(true)} onBlur={() => setIEdited(false)} editorState={editorState} onChange={onChange} />
       </div>
     </>

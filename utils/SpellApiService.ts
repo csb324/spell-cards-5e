@@ -46,6 +46,7 @@ const SpellApiService = {
       ritual: apiResponse["ritual"],
       concentration: apiResponse["concentration"],
       castingTime: apiResponse["casting_time"],
+      descSize: 9,
       damageAtCharacterLevel,
       components
     };
