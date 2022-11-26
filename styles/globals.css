@@ -38,7 +38,7 @@ body[data-theme='fantasy'] {
 }
 body[data-theme='bgs'] {
   --body-font: var(--font-roboto-condensed);
-  --header-font:  var(--font-roboto-condensed);
+  --header-font:  var(--font-bungee);
 }
 
 

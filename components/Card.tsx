@@ -114,7 +114,7 @@ function Card({
             <p className={styles.metaInfo}>
               { verbal ? <span>V</span> : ''}
               { somatic ? <span>S</span> : ''}
-              { material ? <span>M ({materialDesc})</span> : ''}
+              { material ? <span>M <span style={{fontSize: 'var(--text-size)'}}>({materialDesc})</span>)</span> : ''}
             </p>
           </div>
           <div className={styles.metaBox}>
