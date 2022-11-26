@@ -22,8 +22,8 @@ body[data-theme='basic'] {
 }
 
 body[data-theme='fancy'] {
-  --header-font: var(--font-poppins);
-  --body-font: var(--font-poppins);
+  --header-font: var(--font-fancy);
+  --body-font: var(--font-alegreya);
   --header-transform: none;
 }
 

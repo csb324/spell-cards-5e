@@ -1,15 +1,12 @@
 import { AnyAction, configureStore, ThunkAction } from '@reduxjs/toolkit';
+import { useEffect } from 'react';
 import { blankCard } from '../utils/constants';
 import { listenerMiddleware } from './localStorageMiddleware';
 import rootReducer, { RootState } from './rootReducer';
 
-
-let savedCards = [
+const savedCards = [
   blankCard
 ];
-if(typeof window !== 'undefined') {
-  savedCards = localStorage ? JSON.parse(localStorage.getItem("cards") || "[]") : [];
-}
 
 const store = configureStore({
   reducer: rootReducer,

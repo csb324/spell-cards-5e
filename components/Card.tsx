@@ -1,4 +1,4 @@
-import { GiSandsOfTime, GiCoolSpices, GiTrashCan, GiArrowDunk, GiHighlighter } from 'react-icons/gi';
+import { GiSandsOfTime, GiCoolSpices, GiTrashCan, GiArrowDunk, GiHighlighter, GiSpikes } from 'react-icons/gi';
 import { BiTime } from 'react-icons/bi';
 
 import CSS from 'csstype';
@@ -7,6 +7,7 @@ import { SpellType, Theme } from '../utils/models';
 import fantasyStyles from '../styles/Card-fantasy.module.css';
 import modernStyles from '../styles/Card-modern.module.css';
 import bgsStyles from '../styles/Card-bgs.module.css';
+import fancyStyles from '../styles/Card-fancy.module.css';
 import standardStyles from '../styles/Card.module.css';
 
 import { useAppSelector } from '../stores/hooks';
@@ -18,7 +19,7 @@ const themeMap: Record<Theme, Record<string, string>> = {
   'fantasy': fantasyStyles,
   'modern': modernStyles,
   'basic': standardStyles,
-  'fancy': standardStyles,
+  'fancy': fancyStyles,
   'bgs': bgsStyles
 }
 
@@ -37,9 +38,22 @@ function Card({
   const { name, level, components } = spell;
   const { verbal, somatic, material, materialDesc } = components;
 
+  let cardBg = null;
+
   let labelKey: LabelKey = 'text';
-  if(theme === 'fantasy') {
+  if(theme === 'fantasy' || theme === 'fancy') {
     labelKey = 'icon';
+  }
+
+  if(theme === 'fancy') {
+    cardBg = (
+      <div className="absolute text-2xl text-[var(--color)] z-0 top-0 left-0 right-0 bottom-0 overflow-hidden">        
+        <GiSpikes className="-top-3 -left-3 absolute"/>
+        <GiSpikes className="-bottom-3 -left-3 absolute"/>
+        <GiSpikes className="-top-3 -right-3 absolute"/>
+        <GiSpikes className="-bottom-3 -right-3 absolute"/>
+      </div>
+    )
   }
 
   const styles = themeMap[theme];
@@ -96,40 +110,43 @@ function Card({
       { activeButton }
 
       <div className={styles.Card}>
-        <h1 className={styles.spellName}>{name || "New Spell" }</h1>
-        <div className={styles.meta}>
-          <div className={styles.metaBox}>
-            <p className={styles.metaLabel}>{ labels.time[labelKey] }</p>
-            <p className={styles.metaInfo}>
-              { spell.castingTime }
-              { spell.ritual && ' or Ritual'}
-            </p>
+        { cardBg }
+        <div className="relative z-10 h-full flex flex-col">
+          <h1 className={styles.spellName}>{name || "New Spell" }</h1>
+          <div className={styles.meta}>
+            <div className={styles.metaBox}>
+              <p className={styles.metaLabel}>{ labels.time[labelKey] }</p>
+              <p className={styles.metaInfo}>
+                { spell.castingTime }
+                { spell.ritual && ' or Ritual'}
+              </p>
+            </div>
+            <div className={styles.metaBox}>
+              <p className={styles.metaLabel}>{ labels.range[labelKey] }</p>
+              <p className={styles.metaInfo}>{ spell.range }</p>
+            </div>
+            <div className={styles.metaBox}>
+              <p className={styles.metaLabel}>{ labels.components[labelKey] }</p>
+              <p className={styles.metaInfo}>
+                { verbal ? <span>V</span> : ''}
+                { somatic ? <span>S</span> : ''}
+                { material ? <span>M <span style={{fontSize: 'var(--text-size)'}}>({materialDesc})</span></span> : ''}
+              </p>
+            </div>
+            <div className={styles.metaBox}>
+              <p className={styles.metaLabel}>{ labels.duration[labelKey] }</p>
+              <p className={styles.metaInfo}>
+                { spell.duration }
+                { spell.concentration && ' (C)'}
+              </p>
+            </div>
           </div>
-          <div className={styles.metaBox}>
-            <p className={styles.metaLabel}>{ labels.range[labelKey] }</p>
-            <p className={styles.metaInfo}>{ spell.range }</p>
+          <div className={styles.details}>
+            <p className={styles.desc} dangerouslySetInnerHTML={{__html: replaceNewlines(spell.desc)}}></p>
+            { higherLevelContainer }
           </div>
-          <div className={styles.metaBox}>
-            <p className={styles.metaLabel}>{ labels.components[labelKey] }</p>
-            <p className={styles.metaInfo}>
-              { verbal ? <span>V</span> : ''}
-              { somatic ? <span>S</span> : ''}
-              { material ? <span>M <span style={{fontSize: 'var(--text-size)'}}>({materialDesc})</span>)</span> : ''}
-            </p>
-          </div>
-          <div className={styles.metaBox}>
-            <p className={styles.metaLabel}>{ labels.duration[labelKey] }</p>
-            <p className={styles.metaInfo}>
-              { spell.duration }
-              { spell.concentration && ' (C)'}
-            </p>
-          </div>
+          <p className={styles.spellType}>Level {level} { spell.schoolOfMagic }</p>
         </div>
-        <div className={styles.details}>
-          <p className={styles.desc} dangerouslySetInnerHTML={{__html: replaceNewlines(spell.desc)}}></p>
-          { higherLevelContainer }
-        </div>
-        <p className={styles.spellType}>Level {level} { spell.schoolOfMagic }</p>
       </div>
     </div>
   );

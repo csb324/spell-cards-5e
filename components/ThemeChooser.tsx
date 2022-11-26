@@ -28,7 +28,7 @@ function ThemeChooser() {
   }
 
   const colorPicker = colorOpen && (
-    <div className="absolute left-0 top-5 z-10">
+    <div className="absolute left-0 top-5 z-20">
       <CompactPicker color={color} onChangeComplete={setNewColor} />
     </div>
   )

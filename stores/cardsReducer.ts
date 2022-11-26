@@ -30,9 +30,12 @@ const cardsSlice = createSlice({
     },
     edit: (state, action: PayloadAction<EditPayload>) => {
       state.list[action.payload.index] = action.payload.card;
+    },
+    initCards: (state, action: PayloadAction<SpellType[]>) => {
+      state.list = action.payload;
     }
   }
 });
 
-export const { add, remove, edit } = cardsSlice.actions;
+export const { add, remove, edit, initCards } = cardsSlice.actions;
 export default cardsSlice.reducer;
