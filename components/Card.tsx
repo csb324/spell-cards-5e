@@ -6,6 +6,7 @@ import CSS from 'csstype';
 import { SpellType, Theme } from '../utils/models';
 import fantasyStyles from '../styles/Card-fantasy.module.css';
 import modernStyles from '../styles/Card-modern.module.css';
+import bgsStyles from '../styles/Card-bgs.module.css';
 import standardStyles from '../styles/Card.module.css';
 
 import { useAppSelector } from '../stores/hooks';
@@ -17,7 +18,8 @@ const themeMap: Record<Theme, Record<string, string>> = {
   'fantasy': fantasyStyles,
   'modern': modernStyles,
   'basic': standardStyles,
-  'fancy': standardStyles
+  'fancy': standardStyles,
+  'bgs': bgsStyles
 }
 
 function Card({

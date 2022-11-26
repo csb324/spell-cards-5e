@@ -46,6 +46,7 @@ function ThemeChooser() {
         <button onClick={() => setAppTheme('fancy')} className={buttonClasses}>fancy</button>
         <button onClick={() => setAppTheme('modern')} className={buttonClasses}>modern</button>
         <button onClick={() => setAppTheme('fantasy')} className={buttonClasses}>fantasy</button>
+        <button onClick={() => setAppTheme('bgs')} className={buttonClasses}>stripe</button>
         <div className="relative inline-block">
           <button onClick={() => toggleColorOpen()} className={buttonClasses}>
             pick color

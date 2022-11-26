@@ -36,3 +36,16 @@ body[data-theme='fantasy'] {
   --header-font: var(--font-cormorant);
   --body-font: var(--font-cormorant);
 }
+body[data-theme='bgs'] {
+  --body-font: var(--font-roboto-condensed);
+  --header-font:  var(--font-roboto-condensed);
+}
+
+
+.Card:nth-child(9) {
+  page-break-after: always;
+}
+
+.pagebreak {
+  page-break-after: always;
+}

@@ -1,4 +1,4 @@
-import { Cormorant, Lora, Marhey, Overpass, Poppins, Sono, Roboto } from "@next/font/google";
+import { Cormorant, Lora, Marhey, Overpass, Poppins, Sono, Roboto, Roboto_Condensed } from "@next/font/google";
 
 const lora = Lora({ subsets: ['latin'] });
 const marhey = Marhey({ subsets: ['latin'] });
@@ -7,6 +7,7 @@ const poppins = Poppins({ subsets: ['latin'], weight: ["400", "700"] });
 const sono = Sono({ subsets: ['latin'], weight: ["400", "700"] });
 const roboto = Roboto({ subsets: ['latin'], weight: ["400", "700"] });
 const cormorant = Cormorant({weight: ["300", "400", "700"]});
+const robotoCondensed = Roboto_Condensed({ subsets: ['latin'], weight: ["400", "700"] });
 
 function FontSnippet() {
   return (
@@ -19,6 +20,7 @@ function FontSnippet() {
           --font-sono: ${sono.style.fontFamily};
           --font-cormorant: ${cormorant.style.fontFamily};
           --font-roboto: ${roboto.style.fontFamily};
+          --font-roboto-condensed: ${robotoCondensed.style.fontFamily};
         }
       `}</style>
   )

@@ -7,7 +7,7 @@ export type ComponentType = {
   materialDesc?: string
 }
 
-export type Theme = 'basic' | 'fancy' | 'modern' | 'fantasy';
+export type Theme = 'basic' | 'fancy' | 'modern' | 'fantasy' | 'bgs';
 
 export type SpellType = {
   name: string,

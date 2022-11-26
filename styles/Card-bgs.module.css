@@ -1,0 +1,67 @@
+.Card {
+  width: 240px;
+  height: 336px;
+  background-image: repeating-linear-gradient(
+    45deg,
+    var(--color),
+    var(--color) 2px,
+    white 2px,
+    white 4px
+  );
+  font-family: var(--body-font);
+  display: flex;
+  flex-direction: column;
+
+}
+
+
+.spellName {
+  font-size: 16px;
+  text-align: center;
+  background: var(--color);
+}
+
+.spellType {
+  font-size: 10px;
+  background-color: var(--color);
+  padding: 2px;
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+}
+.metaBox {
+  margin: 5px 5px 0;
+  background-color: white;
+  flex-basis: 40%;
+  flex-grow: 1;
+  padding: 2px;
+}
+
+.metaLabel {
+  font-size: 10px;
+  font-weight: bold;
+}
+.metaInfo {
+  font-size: 10px;
+}
+
+.details {
+  padding: 3px 8px;
+  text-align: justify;
+  font-size: var(--text-size);
+  flex-grow: 1;
+  background: white;
+  margin: 5px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.atHigherLabel {
+  font-weight: bold;
+}
+.desc {
+  flex-grow: 1;
+}

@@ -13,7 +13,10 @@ function AllCards() {
   const cards = cardsData.map((c, index) => {
     const selector = setActiveCardCreator(index);
     return (
-      <Card key={c.name} spell={c} select={() => { dispatch(selector) }} remove={() => dispatch(remove(index))} isActive={ false }/>
+      <>
+        { index % 9 === 0 && index > 0 && <div className="pagebreak print:mt-4 print:w-full"></div> }
+        <Card key={c.name} spell={c} select={() => { dispatch(selector) }} remove={() => dispatch(remove(index))} isActive={ false }/>
+      </>      
     )
   });
 
