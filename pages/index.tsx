@@ -49,7 +49,7 @@ function App() {
           And icons from <a className="text-blue-600 hover:text-blue-900" href="https://game-icons.net/">game-icons.net</a>
         </li>
         <li>
-          Code available on <a className="text-blue-600 hover:text-blue-900" href="https://game-icons.net/">github</a>
+          Code available on <a className="text-blue-600 hover:text-blue-900" href="https://github.com/csb324/spell-cards-5e">github</a>
         </li>
 
       </ul>

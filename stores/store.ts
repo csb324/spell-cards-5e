@@ -4,7 +4,7 @@ import { blankCard } from '../utils/constants';
 import { listenerMiddleware } from './localStorageMiddleware';
 import rootReducer, { RootState } from './rootReducer';
 
-const savedCards = [
+let savedCards = [
   blankCard
 ];
 
@@ -15,10 +15,11 @@ const store = configureStore({
       list: savedCards
     }
   },
-  middleware: (getDefaultMiddleware) => [
-    ...getDefaultMiddleware(),
-    listenerMiddleware.middleware
-  ]
+  // why concat? it was breaking thunks
+  // https://github.com/reduxjs/redux-thunk/issues/333
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware()
+      .concat([listenerMiddleware.middleware])
 });
 // convert object to string and store in localStorage
 export type AppDispatch = typeof store.dispatch;
