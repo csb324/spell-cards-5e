@@ -39,6 +39,7 @@
   /* display: flex; */
   /* flex-wrap: wrap; */
   /* border-bottom: 1px solid var(--color); */
+  margin-bottom: 4px;
 }
 
 .metaBox {

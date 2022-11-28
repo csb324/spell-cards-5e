@@ -63,7 +63,7 @@ function Card({
   }
 
   const activeButton = !isActive && (
-    <div className='card-overlay print:hidden text-center pt-10 absolute top-0 right-0 left-0 bottom-0 hover:bg-slate-100 hover:bg-opacity-90 opacity-0 hover:opacity-100'>
+    <div className='card-overlay z-20 print:hidden text-center pt-10 absolute top-0 right-0 left-0 bottom-0 hover:bg-slate-100 hover:bg-opacity-90 opacity-0 hover:opacity-100'>
       <button title={`Edit ${name}`} className="text-4xl mr-5 text-blue-900" onClick={() => select()}>
         <GiHighlighter/>
       </button>
@@ -105,7 +105,7 @@ function Card({
 
    
   return (
-    <div style={sizeStyle} className={`relative mt-2 mb-2 mr-2 print:m-2 print:mb-0 ${ isActive ? 'border-blue-600' : ''}`}>
+    <div style={sizeStyle} className={`relative mt-2 mb-2 mr-2 print:block print:m-2 print:mb-0 ${ isActive ? 'border-blue-600' : ''}`}>
 
       { activeButton }
 
