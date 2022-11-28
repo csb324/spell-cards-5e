@@ -105,7 +105,7 @@ function Card({
 
    
   return (
-    <div style={sizeStyle} className={`relative mt-2 mb-2 mr-2 print:block print:m-2 print:mb-0 ${ isActive ? 'border-blue-600' : ''}`}>
+    <div style={sizeStyle} className={`relative mt-2 mb-2 mr-2 print:block print:m-1 print:mb-0 ${ isActive ? 'border-blue-600' : ''}`}>
 
       { activeButton }
 

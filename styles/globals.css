@@ -4,7 +4,7 @@
 
 @layer base {
   body {
-    font-family: var(--font-sono);
+    font-family: var(--font-overpass);
     --text-size: 9px;
   }
 }
@@ -47,5 +47,6 @@ body[data-theme='bgs'] {
 }
 
 .pagebreak {
+  margin-bottom: 1em;
   page-break-after: always;
 }

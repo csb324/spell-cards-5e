@@ -37,7 +37,7 @@ function App() {
         <OneCard/>
       }
 
-      <h2 className="text-lg print:hidden">Brought to you by:</h2>
+      <h2 className="text-lg mt-12 print:hidden">Brought to you by:</h2>
       <ul className="text-sm print:hidden">
         <li>
           <a className="text-blue-600 hover:text-blue-900" href="https://clarabdevelopment.com">Clara B Development</a> (i.e. me, Clara)

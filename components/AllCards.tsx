@@ -22,7 +22,8 @@ function AllCards() {
 
   return(
     <>
-      <button className="print:hidden px-3 rounded-md bg-blue-700 text-white" onClick={() => dispatch(createNewCard())}>add</button>
+      <button className="print:hidden px-3 rounded-md bg-blue-700 text-white" onClick={() => dispatch(createNewCard())}>add card</button>
+      <button className="print:hidden px-3 ml-2 rounded-md bg-blue-700 text-white" onClick={() => print()}>print cards</button>
       <div className="flex-wrap flex">
         { cards }
       </div>
