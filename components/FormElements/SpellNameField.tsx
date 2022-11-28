@@ -33,7 +33,7 @@ function SuggestedSpells({
 
   const spellsList = possibleSpells.map((sp) => {
     return (
-      <button key={sp.index} onClick={() => select(sp)} className="flex w-full pl-1 mb-1 justify-start hover:bg-slate-200">
+      <button key={sp.index} onClick={() => select(sp)} className="flex w-full pl-1 border-b justify-start hover:bg-slate-200">
         <span className="flex-grow text-left">{sp.name}</span>
         <span className="text-green-700 inline-block px-2 bg-green-300 bg-opacity-30">+</span>
       </button>
@@ -44,7 +44,7 @@ function SuggestedSpells({
     <div className="block">
       <p className="text-xs">{ message }</p>
 
-      { spellsList.length > 0 && (<div className="border">
+      { spellsList.length > 0 && (<div className="border border-b-0">
         { spellsList }
       </div>)}
 
