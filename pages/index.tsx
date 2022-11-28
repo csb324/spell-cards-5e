@@ -22,6 +22,8 @@ function App() {
     } 
   });
 
+  const appDescription = "Generating printable PDFs of your DnD spell cards, with an SRD API and CSS! Wow I love acronyms.";
+
   if(allSrdSpells.length === 0) {
     SpellApiService.getList().then((list) => {
       setAllSrdSpells(list.results)
@@ -33,7 +35,12 @@ function App() {
       <Head>
         <title>5E SPELL CARD PRINTABLE GENERATOR</title>
         <meta property="og:title" content="5E SPELL CARD PRINTABLE GENERATOR" key="title" />
-
+        <meta property="description" content={appDescription} />
+        <meta property="og:description" content={appDescription} />
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+        <link rel="manifest" href="/site.webmanifest" />
       </Head>
       
       <FontSnippet />
