@@ -19,7 +19,7 @@ function OneCard() {
       </div>
 
       <div className="flex-grow w-full md:w-1/2 justify-center flex">
-        <Card key={card.name} spell={card} select={() => {}} isActive={ true }/>
+        <Card key={card.name} remove={ undefined } spell={card} select={() => {}} isActive={ true }/>
       </div>
     </div>
   )

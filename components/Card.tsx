@@ -23,17 +23,26 @@ const themeMap: Record<Theme, Record<string, string>> = {
   'bgs': bgsStyles
 }
 
+type cardProps = (
+  {
+    spell: SpellType,
+    select: Function,
+    remove: Function,
+    isActive: false 
+  } | {
+    spell: SpellType,
+    select: Function,
+    isActive: true,
+    remove: undefined
+  }
+);
+
 function Card({
   spell,
   select,
-  remove,
-  isActive
-}: {
-  spell: SpellType,
-  select: Function,
-  remove?: Function,
-  isActive: boolean
-}) {
+  isActive,
+  remove = undefined
+}: cardProps) {
   const theme = useAppSelector((state) => state.ui.theme);
   const { name, level, components } = spell;
   const { verbal, somatic, material, materialDesc } = components;
@@ -62,7 +71,7 @@ function Card({
     return string.replace(/\n/g, "<br>");
   }
 
-  const activeButton = !isActive && (
+  const activeButton = (!isActive && typeof remove !== 'undefined') && (
     <div className='card-overlay z-20 print:hidden text-center pt-10 absolute top-0 right-0 left-0 bottom-0 hover:bg-slate-100 hover:bg-opacity-90 opacity-0 hover:opacity-100'>
       <button title={`Edit ${name}`} className="text-4xl mr-5 text-blue-900" onClick={() => select()}>
         <GiHighlighter/>
