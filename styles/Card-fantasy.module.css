@@ -39,6 +39,7 @@
   justify-content: flex-start;
   align-items: center;
   border-bottom: 1px solid var(--color);  
+  padding: 2px 0;
 }
 .metaBox:last-child {
   border-bottom: none;
@@ -51,6 +52,8 @@
 }
 .metaInfo {
   font-size:12px;
+  line-height: 1.25;
+
 }
 
 .details {

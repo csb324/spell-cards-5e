@@ -1,4 +1,6 @@
 import { ChangeEvent, ChangeEventHandler, useState } from "react";
+import { GiSettingsKnobs  } from "react-icons/gi";
+
 import SpellDescriptionField from "./FormElements/SpellDescriptionField";
 import SpellNameField from "./FormElements/SpellNameField";
 import { useAppDispatch, useAppSelector } from "../stores/hooks";
@@ -62,7 +64,12 @@ function EditCard() {
 
       <div className="bg-slate-100 p-2 my-3 rounded-md">
         <button className="w-full text-left hover:text-blue-700" onClick={() => setMetaOpen(!metaOpen)}>
-          <h3 className="h3 font-mono">Meta Info</h3>
+          <h3 className="h3 flex justify-between items-center font-mono">
+            Meta Info
+            <span className="sr-only">{ metaOpen ? 'less' : 'more'}</span>
+            <GiSettingsKnobs />
+
+          </h3>
         </button>
         { metaOpen && (
         <div>

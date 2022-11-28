@@ -13,7 +13,7 @@ function SuggestedSpells({
   allSrdSpells: SrdType[],
   acceptSuggestion: Function,
 }) {
-  let message = 'Start typing, and I\'ll look for your spell';
+  let message = 'Start typing, and I\'ll look for your spell in the SRD database';
   let possibleSpells: SrdType[] = [];
   if (input.length < 2) {
     possibleSpells = [];

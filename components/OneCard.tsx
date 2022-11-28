@@ -2,6 +2,7 @@ import { useAppDispatch, useAppSelector } from '../stores/hooks';
 import Card from "./Card";
 import EditCard from "./EditCard";
 import { finishEditing } from '../stores/thunks';
+import { buttonClasses } from '../utils/constants';
 
 function OneCard() {  
   const dispatch = useAppDispatch();
@@ -14,7 +15,7 @@ function OneCard() {
   return (
     <div className="flex flex-grow">
       <div className="flex-initial w-full md:w-1/2">
-        <button onClick={goBack}>Back</button>
+        <button className={`${buttonClasses} bg-slate-200 tracking-widest`} onClick={goBack}>Back</button>
         <EditCard />
       </div>
 
