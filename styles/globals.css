@@ -4,9 +4,20 @@
 
 @layer base {
   body {
-    font-family: var(--font-overpass);
+    font-family: var(--font-alegreya);
+    --font-mono: var(--font-sono);
     --text-size: 9px;
   }
+
+  body, html {
+    min-height: 100vh;
+  }
+  body, #__next {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+
 }
 
 /* font-family: 'Lora', serif;

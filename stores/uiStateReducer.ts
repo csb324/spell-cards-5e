@@ -8,7 +8,7 @@ const uiSlice = createSlice({
     activeCard: -1,
     activeCardData: blankCard,
     srdSpells: [] as SrdType[],
-    theme: 'bgs' as Theme
+    theme: 'basic' as Theme
   },
   reducers: {
     set: (state, action: PayloadAction<number>) => {

@@ -12,7 +12,7 @@ function OneCard() {
   }
 
   return (
-    <div className="flex">
+    <div className="flex flex-grow">
       <div className="flex-initial w-full md:w-1/2">
         <button onClick={goBack}>Back</button>
         <EditCard />

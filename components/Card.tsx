@@ -109,7 +109,9 @@ function Card({
   }
 
   const sizeStyle: CSS.Properties = {
-   ['--text-size' as any]: `${spell.descSize}px`
+   ['--text-size' as any]: `${spell.descSize}px`,
+    'width': '240px',
+    'height': '336px'
   };
 
    

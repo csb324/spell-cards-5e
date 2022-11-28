@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { CompactPicker, ColorResult } from 'react-color';
+import { ChromePicker, ColorResult } from 'react-color';
 import { useAppDispatch, useAppSelector } from "../stores/hooks";
 import { setTheme } from "../stores/uiStateReducer";
 import { buttonClasses } from "../utils/constants";
@@ -28,8 +28,8 @@ function ThemeChooser() {
   }
 
   const colorPicker = colorOpen && (
-    <div className="absolute left-0 top-5 z-20">
-      <CompactPicker color={color} onChangeComplete={setNewColor} />
+    <div className="absolute left-0 top-5 z-40 font-sans">
+      <ChromePicker disableAlpha={true} color={color} onChangeComplete={setNewColor} />
     </div>
   )
 

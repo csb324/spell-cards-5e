@@ -22,9 +22,11 @@ function AllCards() {
 
   return(
     <>
-      <button className="print:hidden px-3 rounded-md bg-blue-700 text-white" onClick={() => dispatch(createNewCard())}>add card</button>
-      <button className="print:hidden px-3 ml-2 rounded-md bg-blue-700 text-white" onClick={() => print()}>print cards</button>
-      <div className="flex-wrap flex">
+      <div>
+        <button className="print:hidden uppercase font-mono leading-6 px-3 rounded-md text-white bg-green-500 hover:bg-green-600" onClick={() => dispatch(createNewCard())}>add card</button>
+        <button className="print:hidden uppercase font-mono leading-6 px-3 ml-2 rounded-md bg-blue-700 hover:bg-blue-800 text-white" onClick={() => print()}>print cards</button>
+      </div>
+      <div className="flex-wrap flex flex-grow">
         { cards }
       </div>
     </>

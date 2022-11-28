@@ -28,7 +28,7 @@ function App() {
   }
 
   return (      
-    <div className="container mx-auto p-4">
+    <div className="container mx-auto p-4 flex flex-col flex-grow">
       <FontSnippet />
       <h1 className="print:hidden uppercase text-center tracking-wider text-4xl mb-6">5e Spell Card Printable Generator</h1>
       <ThemeChooser />
