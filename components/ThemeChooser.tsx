@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { ChromePicker, ColorResult } from 'react-color';
+import { SketchPicker, ColorResult } from 'react-color';
 import isDarkColor from 'is-dark-color';
 import { useAppDispatch, useAppSelector } from "../stores/hooks";
 import { setTheme } from "../stores/uiStateReducer";
@@ -34,9 +34,14 @@ function ThemeChooser() {
     setColorOpen(!colorOpen);
   }
 
+  const presetColors = [
+    '#03256c','#b5bd89','#b66d0d','#559cad','#db5375','#17BEBB','#FAD8D6','#F3C677',
+    '#B9CFD4','#32965D','#FCAB64','#542344','#F6511D','#6369D1','#D6FF79','#136F63'
+  ];
+
   const colorPicker = colorOpen && (
     <div className="absolute left-0 top-5 z-40 font-sans">
-      <ChromePicker disableAlpha={true} color={color} onChangeComplete={setNewColor} />
+      <SketchPicker color={color} disableAlpha={true} presetColors={presetColors} onChangeComplete={setNewColor} />
     </div>
   )
 
