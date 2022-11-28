@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { ChromePicker, ColorResult } from 'react-color';
+import isDarkColor from 'is-dark-color';
 import { useAppDispatch, useAppSelector } from "../stores/hooks";
 import { setTheme } from "../stores/uiStateReducer";
 import { buttonClasses } from "../utils/constants";
@@ -9,6 +10,7 @@ function ThemeChooser() {
   const theme = useAppSelector((state) => state.ui.theme);
   const dispatch = useAppDispatch();
   const [color, setColor] = useState('#dddddd');
+  const [contrastColor, setContrastColor] = useState('#000000');
   const [colorOpen, setColorOpen] = useState(false);
 
   useEffect(() => {
@@ -17,6 +19,11 @@ function ThemeChooser() {
 
   const setNewColor = function(pickedColor: ColorResult) {
     setColor(pickedColor.hex);
+    if(isDarkColor(pickedColor.hex)) {
+      setContrastColor('#ffffff')
+    } else {
+      setContrastColor('#000000');
+    }
   }
 
   const setAppTheme = (newTheme: Theme) => {
@@ -38,6 +45,7 @@ function ThemeChooser() {
       <style jsx global>{`
           html {
             --color: ${color};
+            --contrastColor: ${contrastColor};
           }
         `}</style>
       <div className="w-full print:hidden mb-2 p-3 pt-1 rounded-sm bg-slate-100">
