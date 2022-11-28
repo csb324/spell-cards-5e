@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Head from "next/head";
 
 import { SrdType } from "../utils/models";
 import SpellApiService from "../utils/SpellApiService";
@@ -29,6 +30,12 @@ function App() {
 
   return (      
     <div className="container mx-auto p-4 flex flex-col flex-grow">
+      <Head>
+        <title>5E SPELL CARD PRINTABLE GENERATOR</title>
+        <meta property="og:title" content="5E SPELL CARD PRINTABLE GENERATOR" key="title" />
+
+      </Head>
+      
       <FontSnippet />
       <h1 className="print:hidden uppercase text-center tracking-wider text-4xl mb-6">5e Spell Card Printable Generator</h1>
       <ThemeChooser />
@@ -37,8 +44,8 @@ function App() {
         <OneCard/>
       }
 
-      <h2 className="text-lg mt-12 print:hidden">Brought to you by:</h2>
-      <ul className="text-sm print:hidden">
+      <h2 className="text-lg mt-12 print:hidden font-mono">Brought to you by:</h2>
+      <ul className="text-sm print:hidden list-disc ml-5">
         <li>
           <a className="text-blue-600 hover:text-blue-900" href="https://clarabdevelopment.com">Clara B Development</a> (i.e. me, Clara)
         </li>
@@ -50,6 +57,13 @@ function App() {
         </li>
         <li>
           Code available on <a className="text-blue-600 hover:text-blue-900" href="https://github.com/csb324/spell-cards-5e">github</a>
+        </li>
+
+        <li>
+          <span className="text-xs">
+            <a className="text-blue-600 hover:text-blue-900" rel="me" href="https://mstdn.party/@clarabellum">I'm also on mastodon</a> and <a className="text-blue-600 hover:text-blue-900" rel="me" href="https://twitter.com/clarabellum">twitter</a>
+          </span>
+
         </li>
 
       </ul>

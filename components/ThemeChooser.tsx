@@ -1,16 +1,27 @@
 import React, { useState, useEffect } from "react";
 import { SketchPicker, ColorResult } from 'react-color';
-import isDarkColor from 'is-dark-color';
+import Color from 'colorjs.io';
+
 import { useAppDispatch, useAppSelector } from "../stores/hooks";
 import { setTheme } from "../stores/uiStateReducer";
 import { buttonClasses } from "../utils/constants";
 import { Theme } from "../utils/models";
+
+const CONTRAST_THRESHOLD = 0.65;
+
+function isDarkColor(hex: string):boolean {
+  const color = new Color(hex);
+  const contrast = color.contrast('white', 'Weber');
+
+  return contrast > CONTRAST_THRESHOLD;
+}
 
 function ThemeChooser() {
   const theme = useAppSelector((state) => state.ui.theme);
   const dispatch = useAppDispatch();
   const [color, setColor] = useState('#dddddd');
   const [contrastColor, setContrastColor] = useState('#000000');
+  const [accentTextColor, setAccentTextColor] = useState('#000000');
   const [colorOpen, setColorOpen] = useState(false);
 
   useEffect(() => {
@@ -21,8 +32,10 @@ function ThemeChooser() {
     setColor(pickedColor.hex);
     if(isDarkColor(pickedColor.hex)) {
       setContrastColor('#ffffff')
+      setAccentTextColor(pickedColor.hex);
     } else {
       setContrastColor('#000000');
+      setAccentTextColor('#000000');
     }
   }
 
@@ -51,6 +64,7 @@ function ThemeChooser() {
           html {
             --color: ${color};
             --contrastColor: ${contrastColor};
+            --accentTextColor: ${accentTextColor};
           }
         `}</style>
       <div className="w-full print:hidden mb-2 p-3 pt-1 rounded-sm bg-slate-100">

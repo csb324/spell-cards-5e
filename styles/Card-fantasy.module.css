@@ -49,6 +49,7 @@
 .metaLabel {
   padding-left: 2px;
   padding-right: 4px;
+  color: var(--accentTextColor)
 }
 .metaInfo {
   font-size:12px;
