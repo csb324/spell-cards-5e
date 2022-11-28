@@ -1,5 +1,4 @@
 import { AnyAction, configureStore, ThunkAction } from '@reduxjs/toolkit';
-import { useEffect } from 'react';
 import { blankCard } from '../utils/constants';
 import { listenerMiddleware } from './localStorageMiddleware';
 import rootReducer, { RootState } from './rootReducer';

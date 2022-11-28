@@ -31,7 +31,7 @@ function Card({
 }: {
   spell: SpellType,
   select: Function,
-  remove: Function,
+  remove?: Function,
   isActive: boolean
 }) {
   const theme = useAppSelector((state) => state.ui.theme);
