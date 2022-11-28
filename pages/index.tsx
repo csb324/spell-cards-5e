@@ -61,7 +61,7 @@ function App() {
 
         <li>
           <span className="text-xs">
-            <a className="text-blue-600 hover:text-blue-900" rel="me" href="https://mstdn.party/@clarabellum">I'm also on mastodon</a> and <a className="text-blue-600 hover:text-blue-900" rel="me" href="https://twitter.com/clarabellum">twitter</a>
+            <a className="text-blue-600 hover:text-blue-900" rel="me" href="https://mstdn.party/@clarabellum">I&rsquo;m also on mastodon</a> and <a className="text-blue-600 hover:text-blue-900" rel="me" href="https://twitter.com/clarabellum">twitter</a>
           </span>
 
         </li>
