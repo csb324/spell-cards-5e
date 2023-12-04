@@ -64,15 +64,15 @@ export const fetchSpells = (): AppThunk => {
 }
 
 
-export const getClassSpellsThunk = (c: PcClass, maxLevel?: number): AppThunk => {
+export const getClassSpellsThunk = (c: PcClass, maxLevel: number): AppThunk => {
   return async (dispatch) => {
     const newData = await SpellApiService.getListByClass(c);
 
     newData.results.map(async (spell) => {
       const i = spell.index;
       const fullSpell = await SpellApiService.get(i);
-      console.log(fullSpell)
-      if(maxLevel && fullSpell.level <= maxLevel) {
+
+      if(fullSpell.level <= maxLevel) {
         dispatch(add(fullSpell));
       }
     });

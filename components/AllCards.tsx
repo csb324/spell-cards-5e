@@ -7,6 +7,7 @@ import Card from "./Card";
 import { createNewCard, fetchSpells, getClassSpellsThunk, setActiveCardCreator, removeAllCards } from "../stores/thunks";
 import { useState } from "react";
 import { PcClass } from "../utils/SpellApiService";
+import PreloadedClassList from "./PreloadedClassList";
 
 function AllCards() {
   const cardsData = useAppSelector((state: RootState) => state.cards.list);
@@ -21,19 +22,6 @@ function AllCards() {
       dispatch(fetchSpells());
     }
     setClassListOpen(true)
-  }
-
-  const classList = () => {
-    const classes: PcClass[] = ['barbarian', 'bard', 'cleric', 'druid', 'fighter', 'monk', 'paladin', 'ranger', 'rogue', 'sorcerer', 'warlock', 'wizard']
-    return (classListOpen && (
-      <div className="absolute left-0 top-5 z-40 font-sans">
-        <ul>
-          { classes.map((c) => <li key={`${c}-spells`}>
-            <a onClick={() => dispatch(getClassSpellsThunk(c))}>{c}</a>
-          </li>)}
-        </ul>
-      </div>
-    ))
   }
 
   const cards = cardsData.map((c, index) => {
@@ -59,8 +47,6 @@ function AllCards() {
             add SRE cards by class
         </button>
 
-        { classList() }
-
         <button className="print:hidden uppercase font-mono leading-6 px-3 ml-2 rounded-md bg-blue-700 hover:bg-blue-800 text-white" 
           onClick={() => print()}>
             print cards
@@ -70,6 +56,9 @@ function AllCards() {
           onClick={() => dispatch(removeAllCards())}>
           remove all cards
         </button>
+
+        { classListOpen && <PreloadedClassList closeList={() => setClassListOpen(false)} getClassSpells={(c: PcClass, l: number) => dispatch(getClassSpellsThunk(c, l))} /> }
+
       </div>
       <div className="flex-wrap flex flex-grow">
         { cards }
