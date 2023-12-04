@@ -31,7 +31,7 @@ function App() {
   }
 
   return (      
-    <div className="container mx-auto p-4 flex flex-col flex-grow">
+    <div className="container mx-auto p-4 print:p-0 flex flex-col flex-grow">
       <Head>
         <title>5E SPELL CARD PRINTABLE GENERATOR</title>
         <meta property="og:title" content="5E SPELL CARD PRINTABLE GENERATOR" key="title" />
