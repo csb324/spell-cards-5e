@@ -4,23 +4,18 @@ import { useAppDispatch, useAppSelector } from "../stores/hooks";
 
 
 import Card from "./Card";
-import { createNewCard, fetchSpells, getClassSpellsThunk, setActiveCardCreator, removeAllCards } from "../stores/thunks";
+import { createNewCard, getClassSpellsThunk, setActiveCardCreator, removeAllCards } from "../stores/thunks";
 import { useState } from "react";
 import { PcClass } from "../utils/SpellApiService";
 import PreloadedClassList from "./PreloadedClassList";
 
 function AllCards() {
   const cardsData = useAppSelector((state: RootState) => state.cards.list);
-  const srdSpells = useAppSelector((state) => state.ui.srdSpells);
   const dispatch = useAppDispatch();
   
   const [classListOpen, setClassListOpen] = useState(false);
 
   const openListOfClasses = () => {
-    if(srdSpells.length == 0) {
-      console.log("huh, you're here");
-      dispatch(fetchSpells());
-    }
     setClassListOpen(true)
   }
 
