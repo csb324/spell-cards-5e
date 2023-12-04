@@ -39,7 +39,7 @@ function AllCards() {
         
         <button className="print:hidden uppercase font-mono leading-6 px-3 ml-2 rounded-md text-white bg-green-500 hover:bg-green-600" 
           onClick={() => openListOfClasses()}>
-            add SRE cards by class
+            add SRD cards by class
         </button>
 
         <button className="print:hidden uppercase font-mono leading-6 px-3 ml-2 rounded-md bg-blue-700 hover:bg-blue-800 text-white" 
