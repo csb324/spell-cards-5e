@@ -19,7 +19,7 @@ function App() {
   useEffect(() => {
     if(typeof window !== 'undefined') {
       dispatch(initCards(JSON.parse(localStorage.getItem("cards") || "[]")))
-    } 
+    }
   });
 
   const appDescription = "Generating printable PDFs of your DnD spell cards, with an SRD API and CSS! Wow I love acronyms.";
