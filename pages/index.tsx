@@ -19,7 +19,7 @@ function App() {
   useEffect(() => {
     if(typeof window !== 'undefined') {
       dispatch(initCards(JSON.parse(localStorage.getItem("cards") || "[]")))
-    } 
+    }
   });
 
   const appDescription = "Generating printable PDFs of your DnD spell cards, with an SRD API and CSS! Wow I love acronyms.";
@@ -31,7 +31,7 @@ function App() {
   }
 
   return (      
-    <div className="container mx-auto p-4 flex flex-col flex-grow">
+    <div className="container mx-auto p-4 print:p-0 flex flex-col flex-grow">
       <Head>
         <title>5E SPELL CARD PRINTABLE GENERATOR</title>
         <meta property="og:title" content="5E SPELL CARD PRINTABLE GENERATOR" key="title" />

@@ -6,10 +6,17 @@ type SrdSpellsReponse = {
   count: number
 }
 
+export type PcClass = 'barbarian' | 'bard' | 'cleric' | 'druid' | 'fighter' | 'monk' | 'paladin' | 'ranger' | 'rogue' | 'sorcerer' | 'warlock' | 'wizard'
+
 const SpellApiService = {
 
   getList: async (): Promise<SrdSpellsReponse> => {
     const list = await fetch('https://www.dnd5eapi.co/api/spells');
+    return list.json();
+  },
+
+  getListByClass: async (className: PcClass): Promise<SrdSpellsReponse> => {
+    const list = await fetch('https://www.dnd5eapi.co/api/classes/' + className + '/spells');
     return list.json();
   },
   

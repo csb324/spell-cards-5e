@@ -1,8 +1,8 @@
 import { EditorState } from "draft-js";
 import { blankCard } from "../utils/constants";
 import { SrdType, ValidRichTextKeys } from "../utils/models";
-import SpellApiService from "../utils/SpellApiService";
-import { add, edit } from "./cardsReducer";
+import SpellApiService, { PcClass } from "../utils/SpellApiService";
+import { add, edit, removeAll } from "./cardsReducer";
 import { RootState } from "./rootReducer";
 import { AppThunk } from "./store";
 import { reset, set, setSpells, updateActiveCard } from "./uiStateReducer";
@@ -33,6 +33,14 @@ export const setActiveCardCreator = (newIndex: number): AppThunk => {
   }
 }
 
+export const removeAllCards = (): AppThunk => {
+  return (dispatch) => {
+    console.log("hey!!!")
+    dispatch(removeAll());
+    dispatch(set(-1));
+  }
+}
+
 export const updateRichTextThunkCreator = (propName: ValidRichTextKeys, newState: EditorState): AppThunk => {
   return (dispatch, getState) => {
     const activeCard = getState().ui.activeCardData;
@@ -52,5 +60,21 @@ export const fetchSpells = (): AppThunk => {
   return async function fetchSpellsThunk(dispatch) {
     const spells = await SpellApiService.getList();
     dispatch(setSpells(spells.results));
+  }
+}
+
+
+export const getClassSpellsThunk = (c: PcClass, maxLevel: number): AppThunk => {
+  return async (dispatch) => {
+    const newData = await SpellApiService.getListByClass(c);
+
+    newData.results.map(async (spell) => {
+      const i = spell.index;
+      const fullSpell = await SpellApiService.get(i);
+
+      if(fullSpell.level <= maxLevel) {
+        dispatch(add(fullSpell));
+      }
+    });
   }
 }

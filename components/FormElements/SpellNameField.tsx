@@ -13,7 +13,7 @@ function SuggestedSpells({
   allSrdSpells: SrdType[],
   acceptSuggestion: Function,
 }) {
-  let message = 'Start typing, and I\'ll look for your spell in the SRD database';
+  let message = <p className="text-xs">Start typing, and I&rsquo;ll look for your spell in the SRD database</p>;
   let possibleSpells: SrdType[] = [];
   if (input.length < 2) {
     possibleSpells = [];
@@ -24,7 +24,10 @@ function SuggestedSpells({
   }
 
   if(possibleSpells.length === 0 && input.length >= 2) {
-    message = 'Custom spell!';
+    const searchQuery = input.toLowerCase().split(" ").join("+");
+    message = <p className="text-xs">
+      Custom spell! <a className="text-blue-700" href={`https://www.google.com/search?q=dnd+5e+${searchQuery}`} rel="noreferrer" target="_blank">Google &ldquo;dnd 5e {input}&rdquo;</a>
+    </p>
   }
 
   const select = (sp: SrdType) => {
@@ -42,7 +45,7 @@ function SuggestedSpells({
 
   return (
     <div className="block">
-      <p className="text-xs">{ message }</p>
+      { message }
 
       { spellsList.length > 0 && (<div className="border border-b-0">
         { spellsList }

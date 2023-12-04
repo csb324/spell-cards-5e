@@ -28,6 +28,9 @@ const cardsSlice = createSlice({
     remove: (state, action: PayloadAction<number>) => {
       state.list.splice(action.payload, 1);
     },
+    removeAll: (state) => {
+      state.list = [];
+    },
     edit: (state, action: PayloadAction<EditPayload>) => {
       state.list[action.payload.index] = action.payload.card;
     },
@@ -37,5 +40,5 @@ const cardsSlice = createSlice({
   }
 });
 
-export const { add, remove, edit, initCards } = cardsSlice.actions;
+export const { add, remove, edit, initCards, removeAll } = cardsSlice.actions;
 export default cardsSlice.reducer;

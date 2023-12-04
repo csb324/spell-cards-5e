@@ -4,11 +4,20 @@ import { useAppDispatch, useAppSelector } from "../stores/hooks";
 
 
 import Card from "./Card";
-import { createNewCard, setActiveCardCreator } from "../stores/thunks";
+import { createNewCard, getClassSpellsThunk, setActiveCardCreator, removeAllCards } from "../stores/thunks";
+import { useState } from "react";
+import { PcClass } from "../utils/SpellApiService";
+import PreloadedClassList from "./PreloadedClassList";
 
 function AllCards() {
   const cardsData = useAppSelector((state: RootState) => state.cards.list);
   const dispatch = useAppDispatch();
+  
+  const [classListOpen, setClassListOpen] = useState(false);
+
+  const openListOfClasses = () => {
+    setClassListOpen(true)
+  }
 
   const cards = cardsData.map((c, index) => {
     const selector = setActiveCardCreator(index);
@@ -23,8 +32,28 @@ function AllCards() {
   return(
     <>
       <div>
-        <button className="print:hidden uppercase font-mono leading-6 px-3 rounded-md text-white bg-green-500 hover:bg-green-600" onClick={() => dispatch(createNewCard())}>add card</button>
-        <button className="print:hidden uppercase font-mono leading-6 px-3 ml-2 rounded-md bg-blue-700 hover:bg-blue-800 text-white" onClick={() => print()}>print cards</button>
+        <button className="print:hidden uppercase font-mono leading-6 px-3 rounded-md text-white bg-green-500 hover:bg-green-600" 
+          onClick={() => dispatch(createNewCard())}>
+            add card
+        </button>
+        
+        <button className="print:hidden uppercase font-mono leading-6 px-3 ml-2 rounded-md text-white bg-green-500 hover:bg-green-600" 
+          onClick={() => openListOfClasses()}>
+            add SRD cards by class
+        </button>
+
+        <button className="print:hidden uppercase font-mono leading-6 px-3 ml-2 rounded-md bg-blue-700 hover:bg-blue-800 text-white" 
+          onClick={() => print()}>
+            print cards
+        </button>
+
+        <button className="print:hidden uppercase font-mono leading-6 px-3 ml-2 rounded-md bg-red-700 hover:bg-red-800 text-white" 
+          onClick={() => dispatch(removeAllCards())}>
+          remove all cards
+        </button>
+
+        { classListOpen && <PreloadedClassList closeList={() => setClassListOpen(false)} getClassSpells={(c: PcClass, l: number) => dispatch(getClassSpellsThunk(c, l))} /> }
+
       </div>
       <div className="flex-wrap flex flex-grow">
         { cards }
